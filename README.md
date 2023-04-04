@@ -23,11 +23,32 @@
 
 ----
 
-[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline)
+[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline) | [中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)
 
 
 ## 更新
 
+2023/4/5 上传PromptCBLUE的v0.1版本，包含xxx个任务共xxx条数据. 数据下载: [百度网盘(提取码: xxx)]()
+
+2023/4/3 PromptCBLUE上线了，将持续更新(目前版本只包含train/valid split，后续将提供在线评估平台) 🎉🎉🎉
 
 
-2023/4/3 PromptCBLUE上线了，将持续更新 🎉🎉🎉
+## 致谢
+
+本项目基于CBLUE基准等数据集进行二次开发，在此对相关项目和研究开发人员表示感谢。
+
+- [CBLUE](https://tianchi.aliyun.com/dataset/95414)
+- 
+
+
+## 免责声明
+
+本项目相关资源仅供学术研究之用，严禁用于商业用途。
+
+
+## 问题反馈
+如有问题，请在GitHub Issue中提交。
+
+- 在提交问题之前，请先查看FAQ能否解决问题，同时建议查阅以往的issue是否能解决你的问题。
+- 重复以及与本项目无关的issue会被[stable-bot](stale · GitHub Marketplace)处理，敬请谅解。
+- 礼貌地提出问题，构建和谐的讨论社区。
