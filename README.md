@@ -30,4 +30,4 @@
 
 
 
-2023/4/3 PromptCBLUE上线了 🎉🎉🎉
+2023/4/3 PromptCBLUE上线了，将持续更新 🎉🎉🎉
