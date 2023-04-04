@@ -38,7 +38,18 @@
 本项目基于CBLUE基准等数据集进行二次开发，在此对相关项目和研究开发人员表示感谢。
 
 - [CBLUE](https://tianchi.aliyun.com/dataset/95414)
-- 
+
+
+## 数据集详情
+
+### PromptCBLUE总体统计
+
+| 版本号 | v0.1 |
+| prompt模板数量 | xxx |
+| 训练集 | xxx |
+| 验证集 | xxx |
+| 测试集 | ⏳  |
+
 
 
 ## 免责声明
