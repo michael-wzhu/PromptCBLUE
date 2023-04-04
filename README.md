@@ -1,4 +1,14 @@
-PromptCBLUE
+[**中文**](./README.md) | [**English**](./README_EN.md)
+
+<p align="center">
+    <br>
+    <img src="./pics/promptCBLUE_banner_v0.png" width="600"/>
+    <br>
+</p>
+<p align="center">
+    <img alt="GitHub" src="https://img.shields.io/github/license/ymcui/Chinese-LLaMA-Alpaca.svg?color=blue&style=flat-square">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ymcui/Chinese-LLaMA-Alpaca">
+</p>
 
 
 以ChatGPT、GPT-4等为代表的大语言模型（Large Language Model, LLM）掀起了新一轮自然语言处理领域的研究浪潮，展现出了类通用人工智能（AGI）的能力，受到业界广泛关注。在LLM大行其道的背景下，几乎所有的NLP任务都转化为了基于提示的语言生成任务。然而，在中文医学NLP社区中，尚未有一个统一任务形式的评测基准。
@@ -9,3 +19,15 @@ PromptCBLUE
 - 🚀 为提升LLM的医疗对话能力，增加百万级的在线问诊数据; (TODO)
 - 🚀 新增文献标题生成/摘要生成任务；(TODO)
 - 🚀 对CBLUE基准中的任务[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline)进行重构，形成第一个中文医疗推理数据集，用于评测中文LLM在医疗场景下的推理能力；(TODO)
+
+
+----
+
+[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline)
+
+
+## 更新
+
+
+
+2023/4/3 PromptCBLUE上线了 🎉🎉🎉
