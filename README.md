@@ -28,7 +28,7 @@
 
 ## 更新
 
-2023/4/5 上传PromptCBLUE的v0.1版本，包含xxx个任务共xxx条数据. 数据下载: [百度网盘(提取码: xxx)]()
+2023/4/5 上传PromptCBLUE的v0.1版本，包含xxx个任务共xxx条数据. 数据下载: [HuggingFace Hub]()
 
 2023/4/3 PromptCBLUE上线了，将持续更新(目前版本只包含train/valid split，后续将提供在线评估平台) 🎉🎉🎉
 
@@ -390,6 +390,13 @@
 
 
 ### 数据样例
+
+## 评测方案
+
+### 提交格式
+
+虽然PromptCBLUE中所有的任务都已经转化为了根据prompt生成回复的统一格式，在评测中我们仍然需要将部分任务的回复解析为结构化格式。dev集与test集采用相同的结构化格式，请参考[dev集结构化格式](./datasets/PromptCBLUE/open_version_v0.1/dev_structured.json)
+
 
 
 
