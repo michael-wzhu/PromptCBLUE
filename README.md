@@ -395,14 +395,58 @@
 
 ### 提交格式
 
-虽然PromptCBLUE中所有的任务都已经转化为了根据prompt生成回复的统一格式，在评测中我们仍然需要将部分任务的回复解析为结构化格式。dev集与test集采用相同的结构化格式，请参考[dev集结构化格式](./datasets/PromptCBLUE/open_version_v0.1/dev_structured.json)
+虽然PromptCBLUE中所有的任务都已经转化为了根据prompt生成回复的统一格式，在评测中我们仍然需要将部分任务的回复解析为结构化格式,以json格式进行提交。提交文件总体格式如下：
+
+```bash
+
+{
+  "task_name": [
+    {
+      "sample_id": str,
+      "answer": Union[str, list, dict],
+    }
+  ]
+}
+
+```
+
+示例：test集与dev集采用相同的结构化格式，请参考[dev集结构化格式](./datasets/PromptCBLUE/open_version_v0.1/dev_structured.json)。
+
+请大家在提交时注意：每个test样本的答案都需要提交，且不能更改样本"sample_id"字段，否则评测系统将会因为样本数量不对应而无法输出分数。
 
 
+### 评价指标
+
+本评测任务只有一个测试集，但是其包含多个任务的测试样本，我们采用在各个任务上分别计分的方式进行评测。各个任务上的评测指标如下：
+
+- 对于CMeEE-V2和IMCS-V2-NER任务，采用基于实体实例层面的严格的(strict)，micro的Precision, Recall, F1分数。这里的实体实例包含mention（即实体名称的所有组成字符）和类型这两个组成字段。这里"严格的"指模型必须在指定的样本sample_id上，完全正确预测出ground truth中的实体实例的mention和类型，才能算是成功预测出这个实体实例，则true positive (TP) 加1。而如果模型预测的实体实例不在ground truth中，则false positive (FP)加1。如果ground truth中的实体实例未被模型预测到，则false negative(FN)加1。最终根据整个测试集上的TP，FP，FN计算Precision, Recall, F1分数。
+- 对于CMeIE任务，采用基于三元组实例层面的严格的(strict)，micro的precision, recall, F1分数。这里的三元组实例包含头实体mention, 尾实体mention，和关系类型字段。
+- 对于CHIP-CDEE任务，采用基于临床事件实例层面的严格的(strict)，micro的precision, recall, F1分数。这里的临床事件实例包含主体词，发生状态，描述词和解剖部位字段。
+- 对于IMCS-V2-SR和CHIP-MDCFNPC任务，采用基于临床发现或者症状实例层面的严格的(strict)，micro的precision, recall, F1分数。这里的临床发现或者症状实例包含mention和阴阳性判断标签字段。
+- 对CHIP-CDN任务，采用基于ICD-10标准词实例层面的严格的(strict)，micro的precision, recall, F1分数。这里的ICD-10标准词实例包含mention和阴阳性判断标签字段。
+- 对CHIP-STS， CHIP-CTC，IMCS-V2-DAC，KUAKE-IR，KUAKE-QIC，KUAKE-QTR任务，我们采用Micro的precision, recall, F1分数作为评估指标。
+- 对于MedDG和IMCS-V2-MRG数据集，我们采用Rouge-1，Rouge-2，Rouge-L分数作为评估指标。为避免分词影响，计算rouge分数前，会将句子中的汉字拆开，用空格分隔。IMCS-V2-MRG任务中，需要将模型生成的诊断报告拆分为主诉, 现病史, 辅助检查, 既往史, 诊断, 建议这六个章节，分别计算rouge得分后取平均分。
+
+上述任务中，F1(micro/macro)或者Rouge-L将作为每个任务的主要指标。
+
+
+### 其他评测规则
+
+- 评测参与者不得使用ChatGPT进行测试集预测；
+
+- 评测参与者可以使用任何资源进行LLM训练，包括采用自有的医疗领域(有标注/无标注)数据进行训练。
+
+- 评测参与者可以采用更多的prompt，包括self-instruct方法得到的数据进行评测。但是在预测时，需要采用测试集现有的prompt进行评测。我们正在构建大规模的[医疗领域self-instruct数据集]()。
+
+- 评测参与者需要提交自有LLM在test集上的生成结果(test.json)与结构化的预测结果(test_sructured.json)，包括解析test.json文件转化为test_sructured.json的代码。
+
+- 我们鼓励评测参与者采用自有的LLM生成预测结果的同时生成其思维过程。我们目前正在研讨如何对LLM在PromptCBLUE上的思维过程进行人工评测。
 
 
 ## baseline模型
 
-TODO: 我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。同时我们也评估了现有的开源中文LLM，如Chinese-LLaMA.
+TODO: 我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。详细结果我们将会尽快更新。
+
 
 ### 零样本设定
 
@@ -412,7 +456,7 @@ TODO: 我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu
 
 ### 少样本设定
 
-在此设定下，百亿以内模型在每个数据集1000个训练样本的设定下进行高效参数微调。
+在此设定下，百亿以内模型在每个数据集1000个训练样本的设定下进行全量微调/高效参数微调。
 
 实验结果：⏳
 
@@ -446,3 +490,8 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 - 在提交问题之前，请先查看FAQ能否解决问题，同时建议查阅以往的issue是否能解决你的问题。
 - 重复以及与本项目无关的issue会被[stable-bot](stale · GitHub Marketplace)处理，敬请谅解。
 - 礼貌地提出问题，构建和谐的讨论社区。
+
+
+## References
+
+- [CBLUE基准]()
