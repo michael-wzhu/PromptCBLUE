@@ -389,13 +389,14 @@
 
 
 
-### 数据样例
 
 ## 评测方案
 
 ### 提交格式
 
-虽然PromptCBLUE中所有的任务都已经转化为了根据prompt生成回复的统一格式，在评测中我们仍然需要将部分任务的回复解析为结构化格式,以json格式进行提交。提交文件总体格式如下：
+虽然PromptCBLUE中所有的任务都已经转化为了根据prompt生成回复的统一格式，评测参与者需要提交自有LLM在test集上的生成结果(按照[test.json](./datasets/PromptCBLUE/open_version_v0.1/test.json)的格式)。在评测中我们仍然需要将部分任务的回复解析为结构化格式,以json格式进行提交。结构化的预测结果命名为test_sructured.json，参赛者需要解析test.json文件转化为test_sructured.json的代码。test_sructured.json文件总体格式如下：
+
+
 
 ```bash
 
@@ -430,6 +431,19 @@
 上述任务中，F1(micro/macro)或者Rouge-L将作为每个任务的主要指标。
 
 
+#### 评测脚本
+
+运行以下命令，对dev集上的模型结果进行评测，并将评测分数保存在scores.json文件中：
+
+```bash
+
+python src/for_evaluation/run_evaluation.py your_path/dev_structured.json your_path/scores.json
+
+
+```
+
+
+
 ### 其他评测规则
 
 - PromptCBLUE的目标是评估LLM在不同医疗任务的总体表现，所以评测参与者只能使用一个LLM模型主干来完成整个测试集的评测。如果参与者使用了参数高效微调方法，则其总共使用的参数高效微调模块的总参数量不得超过其LLM模型主干的1%。
@@ -441,8 +455,6 @@
 - 评测参与者可以使用任何资源进行LLM训练，包括采用自有的医疗领域(有标注/无标注)数据进行训练。
 
 - 评测参与者可以采用更多的prompt，包括self-instruct方法得到的数据进行评测。但是在预测时，需要采用测试集现有的prompt进行评测。我们正在构建大规模的[医疗领域self-instruct数据集]()。
-
-- 评测参与者需要提交自有LLM在test集上的生成结果(test.json)与结构化的预测结果(test_sructured.json)，包括解析test.json文件转化为test_sructured.json的代码。
 
 - 我们鼓励评测参与者采用自有的LLM生成预测结果的同时生成其思维过程。我们目前正在研讨如何对LLM在PromptCBLUE上的思维过程进行人工评测。
 
