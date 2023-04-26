@@ -18,10 +18,8 @@
 - 🚀 将[CBLUE](https://tianchi.aliyun.com/dataset/95414)基准进行二次开发，将16种不同的医疗场景NLP任务全部转化为基于提示的语言生成任务,形成首个中文医疗场景的LLM评测基准，有利于帮助开源社区和业界快速评测公开的或者LLM模型
 
 同时，为辅助LLM在医疗领域的各项能力提升，我们同时开源以下数据/模型资源供参赛者使用：
-- 🚀 **PromptCBLUE**的baseline模型[ChatMed-instruct](xxx)，模型主干来自开源的Bloom-7b底座，微调时采用Parallel-Adapter，在PromptCBLUE训练集上进行微调。代码见[code](./src/finetune_bloom_bmt)。
+- 🚀 **PromptCBLUE**的baseline模型[ChatMed-instruct](xxx)，模型主干来自开源的Bloom-7b1-mt模型，微调时采用全量微调或者是Parallel-Adapter参数高效微调，在PromptCBLUE训练集上进行微调。代码见[code](./src/finetune_bloom_bmt)。
 - 🚀 为提升LLM的医疗知识与回答医学咨询的能力，开源[中文医疗问答数据集ChatMed-Datasets](https://huggingface.co/datasets/michaelwzhu/ChatMed-Datasets)。本数据集采用在线爬取的50w在线问诊数据作为prompt，调用ChatGPT得到答案。本数据集真实反映了真实世界的在线问诊需求。
-- 
-
 
 
 ----
@@ -103,7 +101,7 @@ PromptCBLUE中将各个任务都已经转化为了根据prompt生成回复的统
 
 ```
 
-test_structured.json文件的更具体格式说明见[结构化预测结果格式说明](xxx)。同时，test集与dev集采用相同的结构化格式，请参考[dev集结构化格式](./datasets/toy_examples/dev_structured.json)。
+test_structured.json文件的更具体格式说明见[结构化预测结果格式说明](./src/data/结构化预测结果格式说明.md)。同时，test集与dev集采用相同的结构化格式，请参考[dev集结构化格式](./datasets/toy_examples/dev_structured.json)。
 
 
 C.参赛者需要提供解析test_predictions.json文件转化为test_structured.json文件的代码，命名为post_generate_process.py 。本代码只限于使用python标准库，并采用如下命令可运行：
@@ -198,5 +196,5 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 ## References
 
 - [CBLUE基准](https://tianchi.aliyun.com/dataset/95414)
-- [Bloom-7b1-mt模型](xxx)
-- [ChatGLM-6b模型](xxx)
+- [Bloom-7b1-mt模型](https://huggingface.co/bigscience/bloomz-7b1-mt)
+- [ChatGLM-6b模型](https://github.com/THUDM/ChatGLM-6B)
