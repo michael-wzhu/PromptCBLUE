@@ -140,9 +140,11 @@ python src/for_evaluation/run_evaluation.py your_path/dev_structured.json your_p
 
 
 
-### 其他评测规则
+### 评测规则
 
-- PromptCBLUE的目标是评估LLM在不同医疗任务的总体表现，所以评测参与者只能使用一个LLM模型主干来完成整个测试集的评测。如果参与者使用了参数高效微调方法，则其总共使用的参数高效微调模块的总参数量不得超过其LLM模型主干的1%。
+- PromptCBLUE的目标是评估LLM在不同医疗任务的总体表现，所以评测参与者只能使用一个LLM模型主干来完成整个测试集的评测。对于测试集中的每一个样本，模型输出必须是一个仅用LLM模型主干上连接的语言模型预测头(LM-head)输出的文本序列，LM-head必须是所有任务共享的。选手的最终模型不能在LM-head以外的其他模块产生与任务直接相关的或是(在模型训练过程中)参与损失计算的logits。
+
+- 如果参与者使用了参数高效微调方法，则其总共使用的参数高效微调模块的总参数量不得超过其LLM模型主干的1%。
 
 - 所有评测参与团队需要在提交测试集时，对其模型训练/微调方法进行介绍，也需要注明其训练数据来源。
 
@@ -161,11 +163,35 @@ python src/for_evaluation/run_evaluation.py your_path/dev_structured.json your_p
 
 ## baseline模型
 
-TODO: 我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。详细结果我们将会尽快更新。
+我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。代码详见[PromptCBLUE-baseline模型](./src/ft_chatglm_ptuning)。我们考虑以下baseline方法:
 
-我们使用数据集的train集(68500样本)，对Bloom-7b1-mt，ChatGLM-6b模型进行了进行高效参数微调(所有任务共用相同的高效参数模块)或者全量微调。
+- 基于[ChatMed](https://github.com/michael-wzhu/ChatMed)在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调；
+- 基于ChatGLM-bb模型，在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=2000)；
+- ⏳ TODO: 更多微调方法(如LoRA, Parallel-Adapter等)
+- ⏳ TODO: 采用高效微调的方法，针对每个任务进行微调；
 
-实验结果：⏳
+
+在dev集上实验结果如下：
+
+| task         | metric    | ChatMed+ptuning | ChatGLM-6b+ptuning |
+|--------------|-----------|-----------------|--------------------|
+| CMeEE-V2     | micro-F1  | -               | 0.6071             |
+| CMeIE        | micro-F1  | -               | 0.3413             |
+| CHIP-CDN     | micro-F1  | -               | 0.7846             | 
+| CHIP-CDEE    | micro-F1  | -               | 0.0                | 
+| CHIP-STS     | micro-F1  | -               | 0.6584             |
+| CHIP-CTC     | macro-F1  | -               | 0.7736             |
+| KUAKE-IR     | micro-F1  | -                      | 0.5923             |
+| KUAKE-QIC    | macro-F1  | -                      | 0.7564             |
+| KUAKE-QQR    | micro-F1  | -                      | 0.5899             |
+| KUAKE-QTR    | micro-F1  | -                      | 0.4367             |
+| CHIP-MDCFNPC | micro-F1  | -               | 0.6814             |
+| IMCS-V2-DAC  | macro-F1  | -                      | 0.7242             |
+| IMCS-V2-NER  | micro-F1  | -                      | 0.8527             |
+| IMCS-V2-SR   | micro-F1  | -                      | 0.5850             |
+| IMCS-V2-MRG  | Rouge-L   | -                      | 0.4765 |
+| MedDG        | Rouge-L   | -                      | 0.0938 |
+| Overall      | avg score | -                      | 0.5596 |
 
 
 
@@ -196,5 +222,4 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 ## References
 
 - [CBLUE基准](https://tianchi.aliyun.com/dataset/95414)
-- [Bloom-7b1-mt模型](https://huggingface.co/bigscience/bloomz-7b1-mt)
 - [ChatGLM-6b模型](https://github.com/THUDM/ChatGLM-6B)
