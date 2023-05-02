@@ -163,7 +163,7 @@ python src/for_evaluation/run_evaluation.py your_path/dev_structured.json your_p
 
 ## baseline模型
 
-我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。代码详见[PromptCBLUE-baseline模型](./src/ft_chatglm_ptuning)。我们考虑以下baseline方法:
+我们基于[中文医疗大模型ChatMed](https://github.com/michael-wzhu/ChatMed)构建PromptCBLUE的baseline模型。代码和运行操作详见[PromptCBLUE-baseline模型](./src/ft_chatglm_ptuning)。我们考虑以下baseline方法:
 
 - 基于[ChatMed](https://github.com/michael-wzhu/ChatMed)在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调；
 - 基于ChatGLM-bb模型，在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=2000)；

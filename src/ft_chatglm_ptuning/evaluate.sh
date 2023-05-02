@@ -1,8 +1,8 @@
 PRE_SEQ_LEN=128
-CHECKPOINT=./medical_prompts/experiments/output/adgen-chatglm-6b-pt-128-2e-2
+CHECKPOINT=./medical_prompts/experiments/output/PromptCBLUE-chatglm-6b-pt-128-2e-2/
 STEP=2000
 
-CUDA_VISIBLE_DEVICES=1 python medical_prompts/src/ft_chatglm_ptuning/main.py \
+CUDA_VISIBLE_DEVICES=2 python medical_prompts/src/ft_chatglm_ptuning/main.py \
     --do_predict \
     --validation_file medical_prompts/datasets/PromptCBLUE/internal/gt/dev.json \
     --test_file medical_prompts/datasets/PromptCBLUE/internal/gt/dev.json \
