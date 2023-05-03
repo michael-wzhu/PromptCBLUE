@@ -174,24 +174,25 @@ python src/for_evaluation/run_evaluation.py your_path/dev_structured.json your_p
 在dev集上实验结果如下：
 
 | task         | metric    | ChatMed+ptuning | ChatGLM-6b+ptuning |
-|--------------|-----------|-----------------|--------------------|
-| CMeEE-V2     | micro-F1  | -               | 0.6071             |
-| CMeIE        | micro-F1  | -               | 0.3413             |
-| CHIP-CDN     | micro-F1  | -               | 0.7846             | 
-| CHIP-CDEE    | micro-F1  | -               | 0.0                | 
-| CHIP-STS     | micro-F1  | -               | 0.6584             |
-| CHIP-CTC     | macro-F1  | -               | 0.7736             |
-| KUAKE-IR     | micro-F1  | -                      | 0.5923             |
-| KUAKE-QIC    | macro-F1  | -                      | 0.7564             |
-| KUAKE-QQR    | micro-F1  | -                      | 0.5899             |
-| KUAKE-QTR    | micro-F1  | -                      | 0.4367             |
-| CHIP-MDCFNPC | micro-F1  | -               | 0.6814             |
-| IMCS-V2-DAC  | macro-F1  | -                      | 0.7242             |
-| IMCS-V2-NER  | micro-F1  | -                      | 0.8527             |
-| IMCS-V2-SR   | micro-F1  | -                      | 0.5850             |
-| IMCS-V2-MRG  | Rouge-L   | -                      | 0.4765 |
-| MedDG        | Rouge-L   | -                      | 0.0938 |
-| Overall      | avg score | -                      | 0.5596 |
+|--------------|-----------|--------|--------------------|
+| CMeEE-V2     | micro-F1  | 0.6359 | 0.6071             |
+| CMeIE        | micro-F1  | 0.3765 | 0.3413             |
+| CHIP-CDN     | micro-F1  | 0.7805 | 0.7846             | 
+| CHIP-CDEE    | micro-F1  | 0.4914       | 0.4825             | 
+| CHIP-STS     | micro-F1  | 0.7696 | 0.6584             |
+| CHIP-CTC     | macro-F1  | 0.8046 | 0.7736             |
+| KUAKE-IR     | micro-F1  | 0.6154 | 0.5923             |
+| KUAKE-QIC    | macro-F1  | 0.8113       | 0.7564             |
+| KUAKE-QQR    | micro-F1  | 0.5537       | 0.5899             |
+| KUAKE-QTR    | micro-F1  |  0.4701       | 0.4367             |
+| CHIP-MDCFNPC | micro-F1  | 0.6865 | 0.6814             |
+| IMCS-V2-DAC  | macro-F1  | 0.7059       | 0.7242             |
+| IMCS-V2-NER  | micro-F1  | 0.8508 | 0.8527             |
+| IMCS-V2-SR   | micro-F1  | 0.6168 | 0.5850             |
+| IMCS-V2-MRG  | Rouge-L   | 0.4707 | 0.4765             |
+| MedDG        | Rouge-L   | 0.1035       | 0.0938             |
+| Overall      | avg score | 0.6090 | 0.5898             |
+
 
 
 
