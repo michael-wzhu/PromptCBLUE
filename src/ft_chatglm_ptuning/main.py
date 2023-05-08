@@ -46,13 +46,13 @@ import sys
 
 sys.path.append("./")
 
-from medical_prompts.src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
-from medical_prompts.src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
-from medical_prompts.src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
+from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
+from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
+from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
 
-from medical_prompts.src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
+from src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
 
-from medical_prompts.src.ft_chatglm_ptuning.arguments import ModelArguments, DataTrainingArguments
+from src.ft_chatglm_ptuning.arguments import ModelArguments, DataTrainingArguments
 
 logger = logging.getLogger(__name__)
 
