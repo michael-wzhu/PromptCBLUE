@@ -1,0 +1,354 @@
+{
+  "CMeEE-V2": [
+    {
+      "sample_id": "test-13436",
+      "answer": []
+    },
+    {
+      "sample_id": "test-21108",
+      "answer": []
+    },
+    {
+      "sample_id": "test-29977",
+      "answer": []
+    },
+    {
+      "sample_id": "test-2328",
+      "answer": []
+    },
+    {
+      "sample_id": "test-1202",
+      "answer": []
+    }
+  ],
+  "CMeIE": [
+    {
+      "sample_id": "test-27030",
+      "answer": []
+    },
+    {
+      "sample_id": "test-2375",
+      "answer": []
+    },
+    {
+      "sample_id": "test-13853",
+      "answer": []
+    },
+    {
+      "sample_id": "test-21241",
+      "answer": []
+    },
+    {
+      "sample_id": "test-10386",
+      "answer": []
+    }
+  ],
+  "CHIP-CDN": [
+    {
+      "sample_id": "test-12089",
+      "answer": []
+    },
+    {
+      "sample_id": "test-82943",
+      "answer": []
+    },
+    {
+      "sample_id": "test-75472",
+      "answer": []
+    },
+    {
+      "sample_id": "test-123121",
+      "answer": []
+    },
+    {
+      "sample_id": "test-85974",
+      "answer": []
+    }
+  ],
+  "CHIP-CDEE": [
+    {
+      "sample_id": "test-2598",
+      "answer": []
+    },
+    {
+      "sample_id": "test-3240",
+      "answer": []
+    },
+    {
+      "sample_id": "test-4341",
+      "answer": []
+    },
+    {
+      "sample_id": "test-6453",
+      "answer": []
+    },
+    {
+      "sample_id": "test-1666",
+      "answer": []
+    }
+  ],
+  "CHIP-STS": [
+    {
+      "sample_id": "test-12693",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-11036",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-56872",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-5225",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-13728",
+      "answer": ""
+    }
+  ],
+  "CHIP-CTC": [
+    {
+      "sample_id": "test-43923",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-20172",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-43291",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-43152",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-17740",
+      "answer": ""
+    }
+  ],
+  "CHIP-MDCFNPC": [
+    {
+      "sample_id": "test-125634",
+      "answer": []
+    },
+    {
+      "sample_id": "test-114430",
+      "answer": []
+    },
+    {
+      "sample_id": "test-230623",
+      "answer": []
+    },
+    {
+      "sample_id": "test-183330",
+      "answer": []
+    },
+    {
+      "sample_id": "test-33282",
+      "answer": []
+    }
+  ],
+  "KUAKE-IR": [
+    {
+      "sample_id": "test-5149",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-11078",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-2952",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-16745",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-47",
+      "answer": ""
+    }
+  ],
+  "KUAKE-QIC": [
+    {
+      "sample_id": "test-9060",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-7590",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-2854",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-5419",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-2560",
+      "answer": ""
+    }
+  ],
+  "KUAKE-QQR": [
+    {
+      "sample_id": "test-6143",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-6781",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-4876",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-7980",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-10087",
+      "answer": ""
+    }
+  ],
+  "KUAKE-QTR": [
+    {
+      "sample_id": "test-17079",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-33477",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-6747",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-22159",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-5848",
+      "answer": ""
+    }
+  ],
+  "MedDG": [
+    {
+      "sample_id": "test-75967",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-129",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-85396",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-44400",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-61086",
+      "answer": ""
+    }
+  ],
+  "IMCS-V2-MRG": [
+    {
+      "sample_id": "test-3984",
+      "answer": {}
+    },
+    {
+      "sample_id": "test-2303",
+      "answer": {}
+    },
+    {
+      "sample_id": "test-1442",
+      "answer": {}
+    },
+    {
+      "sample_id": "test-3975",
+      "answer": {}
+    },
+    {
+      "sample_id": "test-5417",
+      "answer": {}
+    }
+  ],
+  "IMCS-V2-NER": [
+    {
+      "sample_id": "test-30182",
+      "answer": []
+    },
+    {
+      "sample_id": "test-79788",
+      "answer": []
+    },
+    {
+      "sample_id": "test-32048",
+      "answer": []
+    },
+    {
+      "sample_id": "test-37196",
+      "answer": []
+    },
+    {
+      "sample_id": "test-30619",
+      "answer": []
+    }
+  ],
+  "IMCS-V2-DAC": [
+    {
+      "sample_id": "test-130825",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-13614",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-97745",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-152831",
+      "answer": ""
+    },
+    {
+      "sample_id": "test-89272",
+      "answer": ""
+    }
+  ],
+  "IMCS-V2-SR": [
+    {
+      "sample_id": "test-16623",
+      "answer": []
+    },
+    {
+      "sample_id": "test-27789",
+      "answer": []
+    },
+    {
+      "sample_id": "test-38502",
+      "answer": []
+    },
+    {
+      "sample_id": "test-3890",
+      "answer": []
+    },
+    {
+      "sample_id": "test-17282",
+      "answer": []
+    }
+  ]
+}
