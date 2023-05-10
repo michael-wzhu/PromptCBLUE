@@ -13,7 +13,7 @@
 
 以ChatGPT、GPT-4等为代表的大语言模型（Large Language Model, LLM）掀起了新一轮自然语言处理领域的研究浪潮，展现出了类通用人工智能（AGI）的能力，受到业界广泛关注。在LLM大行其道的背景下，几乎所有的NLP任务都转化为了基于提示的语言生成任务。然而，在中文医学NLP社区中，尚未有一个统一任务形式的评测基准。
 
-为推动LLM在医疗领域的发展和落地，华东师范大学王晓玲教授团队联合天池团队推出**PromptCBLUE**评测基准, 将[CBLUE](https://tianchi.aliyun.com/dataset/95414)基准进行二次开发，将16种不同的医疗场景NLP任务全部转化为基于提示的语言生成任务,形成首个中文医疗场景的LLM评测基准。**PromptCBLUE**将作为CCKS-2023的评测任务之一，依托于天池大赛平台进行评测。
+为推动LLM在医疗领域的发展和落地，华东师范大学王晓玲教授团队联合阿里巴巴天池平台，复旦大学附属华山医院，东北大学，哈尔滨工业大学（深圳），鹏城实验室与同济大学推出**PromptCBLUE**评测基准, 对[CBLUE](https://tianchi.aliyun.com/dataset/95414)基准进行二次开发，将16种不同的医疗场景NLP任务全部转化为基于提示的语言生成任务,形成首个中文医疗场景的LLM评测基准。**PromptCBLUE**将作为CCKS-2023的评测任务之一，依托于天池大赛平台进行评测。
 
 考虑到目前的LLM训练可能涉及商业数据，大规模模型开源受到各种外在条件的限制，我们将对PromptCBLUE评测开放两个赛道：
 - 通用赛道：接受来自企业，高校，开源社区，各类研究团队或者个人对自研的LLM进行评测，不需要开源其模型。评测地址：[PromptCBLUE通用赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532085/introduction)
@@ -34,7 +34,7 @@
 
 ## 更新
 
-2023/5/08 上传了基于ChatGLM + Lora方法的参数高效微调代码，作为baseline,代码见[ChatGLM+lora code](./src/ft_chatglm_lora)
+2023/5/09 上传了基于ChatGLM + Lora方法的参数高效微调代码，作为baseline,代码见[ChatGLM+lora code](./src/ft_chatglm_lora)
 
 2023/5/05 上传了基于ChatGLM + P-tuning的参数高效微调代码，作为baseline,代码见[ChatGLM+ptuning code](./src/ft_chatglm_ptuning)。快速上手，请参看[ChatGLM+ptuning方法的README]()。
 
@@ -76,7 +76,25 @@
 }
 ```
 
-为了将CBLUE中的各种不同任务适配为符合LLM的输入输出格式，我们对CBLUE各个数据集进行了相应的改造。详见[CBLUE任务改造](./src/data/CBLUE任务改造说明与举例.md)
+为了将CBLUE中的各种不同任务适配为符合LLM的输入输出格式，我们对CBLUE各个数据集进行了相应的改造。详见[CBLUE任务改造](https://github.com/michael-wzhu/PromptCBLUE/blob/main/src/data/CBLUE任务改造说明与举例.md)
+
+
+## 评测组织
+
+### 组织者
+
+朱威, 华东师范大学， wzhu@stu.ecnu.edu.cn   
+陈漠沙，阿里巴巴，Chenmosha.cms@alibaba-inc.com
+王晓玲, 华东师范大学，xlwang@cs.ecnu.edu.cn
+
+### 学术指导委员会
+
+陈亮, 复旦大学附属华山医院 
+黄萱菁，复旦大学 
+贺樑，华东师范大学 
+杨晓春，东北大学 
+汤步洲, 哈尔滨工业大学（深圳）&鹏城实验室 
+王昊奋，同济大学
 
 
 
@@ -162,12 +180,9 @@ results.json文件的更具体格式说明见[结构化预测结果格式说明]
 
 ## baseline模型
 
-我们基于[ChatGLM-6B模型](https://github.com/THUDM/ChatGLM-6B)构建PromptCBLUE的baseline模型。代码和运行操作详见[PromptCBLUE-baseline模型](./src/)。我们考虑以下baseline方法:
+我们基于[ChatGLM-6B模型](https://github.com/THUDM/ChatGLM-6B)构建PromptCBLUE的baseline模型。代码和运行操作详见[PromptCBLUE-baseline模型](https://github.com/michael-wzhu/PromptCBLUE/blob/main/src/)。我们考虑以下baseline方法:
 
 - 基于ChatGLM-6B模型，在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=3000)；
-- ⏳ 基于ChatGLM-6B模型，采用Lora的参数高效微调方法进行微调(bsz=8,lora_rank=8, gradient accumulation=8, steps=3000)；
-- ⏳ TODO: 更多微调方法(如Parallel-Adapter, AdaLora等)；
-- ⏳ TODO: 采用高效微调的方法，针对每个任务进行微调,在预测时对不同任务调用不同的；
 
 
 在dev集上实验结果如下：
@@ -192,7 +207,27 @@ results.json文件的更具体格式说明见[结构化预测结果格式说明]
 | MedDG        | Rouge-L   | 0.1035               | -            |
 | Overall      | avg score | 0.6090               | -            |
 
+我们将会持续不断地输出各种不同的baseline模型与代码给大家，希望大家持续关注本repo：
+- ⏳ 基于ChatGLM-6B模型，采用Lora的参数高效微调方法进行微调(bsz=4,lora_rank=8, gradient accumulation=16, steps=3000)；
+- ⏳ TODO: 更多微调方法(如Parallel-Adapter, AdaLora等)；
+- ⏳ TODO: 采用高效微调的方法，针对每个任务进行微调,在预测时对不同任务调用不同的高效微调模块；
 
+
+## 评测交流与技术交流
+
+PromptCBLUE-CCKS2023评测的钉钉群为：
+<p align="left">
+    <br>
+    <img src="./pics/dingding_groups.jpg" width="300"/>
+    <br>
+</p>
+
+PromptCBLUE与大模型技术交流微信交流群二维码（截止至5月15日有效）：
+<p align="left">
+    <br>
+    <img src="./pics/wechat_qrcode.jpg" width="300"/>
+    <br>
+</p>
 
 
 ## 致谢

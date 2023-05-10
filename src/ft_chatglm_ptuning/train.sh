@@ -7,8 +7,8 @@ ptuning_checkpoint=""  # 如果之前训练过，且存储了ptuning权重，则
 
 CUDA_VISIBLE_DEVICES=1 python src/ft_chatglm_ptuning/main.py \
     --do_train \
-    --train_file $your_path/train.json \
-    --validation_file $your_path/dev.json \
+    --train_file $your_data_path/train.json \
+    --validation_file $your_data_path/dev.json \
     --prompt_column input \
     --response_column target \
     --overwrite_cache \
