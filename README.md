@@ -138,6 +138,13 @@ results.json文件的更具体格式说明见[结构化预测结果格式说明]
 
 在参赛过程中，选手需要将test_predictions.json文件与post_generate_process.py文件打包为test_predictions.zip文件，提交到天池平台的镜像中进行运行，得到results.json文件。**注意在zip文件中不要添加文件夹，即两个被打包的文件必须置于zip文件的顶层。** 选手可以使用 `zip  test_predictions.zip test_predictions.json post_generate_process.py` 命令进行压缩。比赛组织方将会根据天池镜像中的results.json文件打分。选手手动上传的results.json文件不作为评分依据。
 
+选手可参考[post_generate_process.py样例](src/for_eval/post_generate_process.py)对[toy_examples](./datasets/PromptCBLUE/toy_examples)中的dev集或者test集预测结果进行格式转化：
+```bash
+python src/for_eval/post_generate_process.py datasets/PromptCBLUE/toy_examples/dev.json datasets/PromptCBLUE/toy_examples/dev_structured.json
+python src/for_eval/post_generate_process.py datasets/PromptCBLUE/toy_examples/test_predictions.json datasets/PromptCBLUE/toy_examples/results.json
+
+```
+
 
 ### 评价指标
 

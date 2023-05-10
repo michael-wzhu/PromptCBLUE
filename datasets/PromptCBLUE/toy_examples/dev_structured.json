@@ -241,11 +241,11 @@
       "sample_id": "dev-22683",
       "answer": [
         {
-          "entity": "咳嗽",
+          "entity": "呼吸道感染",
           "type": "normalization"
         },
         {
-          "entity": "呼吸道感染",
+          "entity": "咳嗽",
           "type": "normalization"
         }
       ]
@@ -254,11 +254,11 @@
       "sample_id": "dev-12883",
       "answer": [
         {
-          "entity": "双子宫",
+          "entity": "双阴道",
           "type": "normalization"
         },
         {
-          "entity": "双阴道",
+          "entity": "双子宫",
           "type": "normalization"
         }
       ]
