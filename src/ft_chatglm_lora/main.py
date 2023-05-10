@@ -48,7 +48,7 @@ sys.path.append("./")
 from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
 from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
 from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
-from src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
+from src.ft_chatglm_lora.trainer_seq2seq import Seq2SeqTrainer
 from src.ft_chatglm_lora.arguments import ModelArguments, DataTrainingArguments
 
 from peft import PeftModel, LoraConfig, TaskType, get_peft_model, get_peft_model_state_dict
@@ -112,7 +112,7 @@ def main():
         use_auth_token=True if model_args.use_auth_token else None,
     )
     print("raw_datasets: ", raw_datasets)
-    print("raw_datasets: ", len(raw_datasets["train"]))
+    # print("raw_datasets: ", len(raw_datasets["train"]))
 
     # Load pretrained model and tokenizer
     config = ChatGLMConfig.from_pretrained(
@@ -156,12 +156,9 @@ def main():
         )
         model = get_peft_model(model, peft_config)
     model.print_trainable_parameters()
-    old_state_dict = model.state_dict
-    model.state_dict = (
-        lambda self, *_, **__: get_peft_model_state_dict(self, old_state_dict())
-    ).__get__(model, type(model))
-    # for n, p in model.named_parameters():
-    #     print(n, p.requires_grad)
+
+    for n, p in model.named_parameters():
+        print(n, p.requires_grad, p.numel())
 
     prefix = data_args.source_prefix if data_args.source_prefix is not None else ""
 
