@@ -34,7 +34,9 @@
 
 ## 更新
 
-2023/5/09 上传了基于ChatGLM + Lora方法的参数高效微调代码，作为baseline,代码见[ChatGLM+lora code](./src/ft_chatglm_lora)
+2023/05/12 更新ChatGLM-6B + Lora方法在dev集表现(在相同训练步数，相同最大长度限制下，比p-tuning表现较好)。同时添加baseline代码的[requirements.txt](./requirements.txt)
+
+2023/5/09 上传了基于ChatGLM-B + Lora方法的参数高效微调代码，作为baseline,代码见[ChatGLM+lora code](./src/ft_chatglm_lora)
 
 2023/5/05 上传了基于ChatGLM + P-tuning的参数高效微调代码，作为baseline,代码见[ChatGLM+ptuning code](./src/ft_chatglm_ptuning)。快速上手，请参看[ChatGLM+ptuning方法的README]()。
 
@@ -190,34 +192,35 @@ python src/for_eval/post_generate_process.py datasets/PromptCBLUE/toy_examples/t
 我们基于[ChatGLM-6B模型](https://github.com/THUDM/ChatGLM-6B)构建PromptCBLUE的baseline模型。代码和运行操作详见[PromptCBLUE-baseline模型](https://github.com/michael-wzhu/PromptCBLUE/blob/main/src/)。我们考虑以下baseline方法:
 
 - 基于ChatGLM-6B模型，在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=3000)；
+- 基于ChatGLM-6B模型，采用Lora的参数高效微调方法进行微调(bsz=4,lora_rank=8, lora作用在query_key_value,dense,dense_h_to_4h,dense_4h_to_h模块，gradient_accumulation=16, steps=3000)；
 
 
 在dev集上实验结果如下：
 
 | task         | metric    | ChatGLM-6B + ptuning | ChatGLM-6B + LoRA |
 |--------------|-----------|----------------------|-------------------|
-| CMeEE-V2     | micro-F1  | 0.6359               | -                 |
-| CMeIE        | micro-F1  | 0.3765               | -            |
-| CHIP-CDN     | micro-F1  | 0.7805               | -            | 
-| CHIP-CDEE    | micro-F1  | 0.4914               | -            | 
-| CHIP-STS     | micro-F1  | 0.7696               | -            |
-| CHIP-CTC     | macro-F1  | 0.8046               | -            |
-| KUAKE-IR     | micro-F1  | 0.6154               | -            |
-| KUAKE-QIC    | macro-F1  | 0.8113               | -            |
-| KUAKE-QQR    | micro-F1  | 0.5537               | -            |
-| KUAKE-QTR    | micro-F1  | 0.4701               | -            |
-| CHIP-MDCFNPC | micro-F1  | 0.6865               | -            |
-| IMCS-V2-DAC  | macro-F1  | 0.7059               | -            |
-| IMCS-V2-NER  | micro-F1  | 0.8508               | -            |
-| IMCS-V2-SR   | micro-F1  | 0.6168               | -            |
-| IMCS-V2-MRG  | Rouge-L   | 0.4707               | -            |
-| MedDG        | Rouge-L   | 0.1035               | -            |
-| Overall      | avg score | 0.6090               | -            |
+| CMeEE-V2     | micro-F1  | 0.6359               | 0.6725                 |
+| CMeIE        | micro-F1  | 0.3765               | 0.4555            |
+| CHIP-CDN     | micro-F1  | 0.7805               | 0.8461            | 
+| CHIP-CDEE    | micro-F1  | 0.4914               | 0.5456            | 
+| CHIP-STS     | micro-F1  | 0.7696               | 0.8081            |
+| CHIP-CTC     | macro-F1  | 0.8046               | 0.8086            |
+| KUAKE-IR     | micro-F1  | 0.6154               | 0.6835            |
+| KUAKE-QIC    | macro-F1  | 0.8113               | 0.7390            |
+| KUAKE-QQR    | micro-F1  | 0.5537               | 0.6348            |
+| KUAKE-QTR    | micro-F1  | 0.4701               | 0.5428            |
+| CHIP-MDCFNPC | micro-F1  | 0.6865               | 0.7366            |
+| IMCS-V2-DAC  | macro-F1  | 0.7059               | 0.7512            |
+| IMCS-V2-NER  | micro-F1  | 0.8508               | 0.8709            |
+| IMCS-V2-SR   | micro-F1  | 0.6168               | 0.6330            |
+| IMCS-V2-MRG  | Rouge-L   | 0.4707               | 0.4663            |
+| MedDG        | Rouge-L   | 0.1035               | 0.1117            |
+| Overall      | avg score | 0.6090               | 0.6441            |
+
 
 我们将会持续不断地输出各种不同的baseline模型与代码给大家，希望大家持续关注本repo：
-- ⏳ 基于ChatGLM-6B模型，采用Lora的参数高效微调方法进行微调(bsz=4,lora_rank=8, gradient accumulation=16, steps=3000)；
 - ⏳ TODO: 更多微调方法(如Parallel-Adapter, AdaLora等)；
-- ⏳ TODO: 采用高效微调的方法，针对每个任务进行微调,在预测时对不同任务调用不同的高效微调模块；
+- ⏳ TODO: 针对每个任务采用高效微调的方法，在预测时对不同任务调用不同的高效微调模块；
 
 
 ## 评测交流与技术交流
