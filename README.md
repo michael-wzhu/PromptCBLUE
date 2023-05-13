@@ -86,7 +86,9 @@
 ### 组织者
 
 朱威, 华东师范大学， wzhu@stu.ecnu.edu.cn   
+
 陈漠沙，阿里巴巴，Chenmosha.cms@alibaba-inc.com
+
 王晓玲, 华东师范大学，xlwang@cs.ecnu.edu.cn
 
 ### 学术指导委员会
