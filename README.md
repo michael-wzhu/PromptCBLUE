@@ -249,8 +249,7 @@ PromptCBLUE与大模型技术交流微信交流群二维码（截止至5月15日
 
 ## 致谢
 
-本项目基于CBLUE基准等数据集进行二次开发，在此对相关项目和研究开发人员表示感谢。
-
+本项目基于CBLUE基准等数据集进行二次开发，在此感谢中国中文信息学会医疗健康与生物信息专业委员会和天池平台提供的优质评测基准CBLUE:
 - [CBLUE](https://tianchi.aliyun.com/dataset/95414)
 
 Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成。
@@ -275,3 +274,16 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 
 - [CBLUE基准](https://tianchi.aliyun.com/dataset/95414)
 - [ChatGLM-6b模型](https://github.com/THUDM/ChatGLM-6B)
+- [CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark](https://aclanthology.org/2022.acl-long.544) (Zhang et al., ACL 2022)
+- Zan, Hongying, Wenxin Li, Kunli Zhang, Yajuan Ye, Baobao Chang and Zhifang Sui. “Building a Pediatric Medical Corpus: Word Segmentation and Named Entity Annotation.” Chinese Lexical Semantics (2020).
+- Guan, Tongfeng, Hongying Zan, Xiabing Zhou, Hongfei Xu and Kunli Zhang. “CMeIE: Construction and Evaluation of Chinese Medical Information Extraction Dataset.” Natural Language Processing and Chinese Computing (2020).
+- Zong, Hui, Jinxuan Yang, Zeyu Zhang, Zuofeng Li and Xiaoyan Zhang. “Semantic categorization of Chinese eligibility criteria in clinical trials using machine learning methods.” BMC Medical Informatics and Decision Making 21 (2021): n. pag.
+- Liu, Wenge, Jianheng Tang, Jinghui Qin, Lin Xu, Zhuguo Li and Xiaodan Liang. “MedDG: A Large-scale Medical Consultation Dataset for Building Medical Dialogue System.” ArXiv abs/2010.07497 (2020): n. pag.
+- Chen, W., Zhiwei Li, Hongyi Fang, Qian-Qian Yao, Cheng Zhong, Jianye Hao, Qi Zhang, Xuanjing Huang, Jianjun Peng and Zhongyu Wei. “A benchmark for automatic medical consultation system: frameworks, tasks and datasets.” Bioinformatics 39 (2022): n. pag.
+- Chen, W., Cheng Zhong, Jiajie Peng and Zhongyu Wei. “DxFormer: a decoupled automatic diagnostic system based on decoder–encoder transformer with dense symptom representations.” Bioinformatics 39 (2022): n. pag.
+- Wei, Zhongyu, Qianlong Liu, Baolin Peng, Huaixiao Tou, Ting Chen, Xuanjing Huang, Kam-Fai Wong and Xiangying Dai. “Task-oriented Dialogue System for Automatic Diagnosis.” Annual Meeting of the Association for Computational Linguistics (2018).
+- Lin, Xinzhu, Xiahui He, Qin Chen, Huaixiao Tou, Zhongyu Wei and Ting Chen. “Enhancing Dialogue Symptom Diagnosis with Global Attention and Symptom Graph.” Conference on Empirical Methods in Natural Language Processing (2019).
+- Liao, Kangenbei, Qianlong Liu, Zhongyu Wei, Baolin Peng, Qin Chen, Weijian Sun and Xuanjing Huang. “Task-oriented Dialogue System for Automatic Disease Diagnosis via Hierarchical Reinforcement Learning.” ArXiv abs/2004.14254 (2020): n. pag.
+- Long, Dingkun, Qiong Gao, Kuan-sheng Zou, Guangwei Xu, Pengjun Xie, Rui Guo, Jianfeng Xu, Guanjun Jiang, Luxi Xing and P. Yang. “Multi-CPR: A Multi Domain Chinese Dataset for Passage Retrieval.” Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (2022): n. pag.
+- 熊英,陈漠沙,陈清财,汤步洲.CHIP-2021评测任务1概述:医学对话临床发现阴阳性判别任务[J].医学信息学杂志,2023,44(3):46~51
+- 骆迅,倪渊,汤步洲,雷健波. 基于竞赛视角探讨文本语义匹配技术在中文医学文本领域中的应用 [J]. 中国数字医学. 2021 (11)
