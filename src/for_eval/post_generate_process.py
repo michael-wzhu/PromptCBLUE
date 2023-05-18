@@ -5,8 +5,6 @@
 import json
 import sys
 
-from tqdm import tqdm
-
 
 def process_generated_results(pred_file):
 
@@ -30,7 +28,7 @@ def process_generated_results(pred_file):
     }
 
     with open(pred_file, "r", encoding="utf-8") as f:
-        for line in tqdm(f):
+        for line in f:
             line = json.loads(line)
             # print("line: ", line)
 
