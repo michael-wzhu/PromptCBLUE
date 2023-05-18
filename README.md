@@ -286,3 +286,4 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 - Long, Dingkun, Qiong Gao, Kuan-sheng Zou, Guangwei Xu, Pengjun Xie, Rui Guo, Jianfeng Xu, Guanjun Jiang, Luxi Xing and P. Yang. “Multi-CPR: A Multi Domain Chinese Dataset for Passage Retrieval.” Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (2022): n. pag.
 - 熊英,陈漠沙,陈清财,汤步洲.CHIP-2021评测任务1概述:医学对话临床发现阴阳性判别任务[J].医学信息学杂志,2023,44(3):46~51
 - 骆迅,倪渊,汤步洲,雷健波. 基于竞赛视角探讨文本语义匹配技术在中文医学文本领域中的应用 [J]. 中国数字医学. 2021 (11)
+- 李文锋，朱威，王晓玲，等.Text2DT:面向临床针对文本的决策规则抽取技术[J].医学信息学杂志，2022，43（12）：16-22.
