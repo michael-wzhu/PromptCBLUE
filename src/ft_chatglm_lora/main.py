@@ -106,7 +106,7 @@ def main():
         extension = data_args.test_file.split(".")[-1]
 
     raw_datasets = load_dataset(
-        extension,
+        "json",
         data_files=data_files,
         cache_dir=model_args.cache_dir,
         use_auth_token=True if model_args.use_auth_token else None,
@@ -157,8 +157,8 @@ def main():
         model = get_peft_model(model, peft_config)
     model.print_trainable_parameters()
 
-    for n, p in model.named_parameters():
-        print(n, p.requires_grad, p.numel())
+    # for n, p in model.named_parameters():
+    #     print(n, p.requires_grad, p.numel())
 
     prefix = data_args.source_prefix if data_args.source_prefix is not None else ""
 
@@ -185,7 +185,12 @@ def main():
     def preprocess_function_eval(examples):
         inputs, targets = [], []
         for i in range(len(examples[prompt_column])):
-            if examples[prompt_column][i] and examples[response_column][i]:
+            if not examples[response_column][i]:
+                targets.append("filled in !")
+            else:
+                targets.append(examples[response_column][i])
+
+            if examples[prompt_column][i]:
                 query = examples[prompt_column][i]
                 if history_column is None or len(examples[history_column][i]) == 0:
                     prompt = query
@@ -196,7 +201,6 @@ def main():
                         prompt += "[Round {}]\n问：{}\n答：{}\n".format(turn_idx, old_query, response)
                     prompt += "[Round {}]\n问：{}\n答：".format(len(history), query)
                 inputs.append(prompt)
-                targets.append(examples[response_column][i])
 
         inputs = [prefix + inp for inp in inputs]
         model_inputs = tokenizer(inputs,
@@ -264,10 +268,10 @@ def main():
         return model_inputs
     
     def print_dataset_example(example):
-        print("input_ids",example["input_ids"])
-        print("inputs", tokenizer.decode(example["input_ids"]))
-        print("label_ids", example["labels"])
-        print("labels", tokenizer.decode(example["labels"]))
+        print("input_ids: ",example["input_ids"])
+        print("inputs: ", tokenizer.decode(example["input_ids"]))
+        print("label_ids: ", example["labels"])
+        print("labels: ", tokenizer.decode(example["labels"]))
 
     if training_args.do_train:
         if "train" not in raw_datasets:
