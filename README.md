@@ -38,7 +38,7 @@
 
 2023/5/09 上传了基于ChatGLM-B + Lora方法的参数高效微调代码，作为baseline,代码见[ChatGLM+lora code](./src/ft_chatglm_lora)
 
-2023/5/05 上传了基于ChatGLM + P-tuning的参数高效微调代码，作为baseline,代码见[ChatGLM+ptuning code](./src/ft_chatglm_ptuning)。快速上手，请参看[ChatGLM+ptuning方法的README]()。
+2023/5/05 上传了基于ChatGLM + P-tuning的参数高效微调代码，作为baseline,代码见[ChatGLM+ptuning code](./src/ft_chatglm_ptuning)。快速上手，请参看[ChatGLM+ptuning方法的README](./src/README.md)。
 
 2023/4/25 PromptCBLUE(v0.1)上线了，将持续更新！ 🎉🎉🎉
 
