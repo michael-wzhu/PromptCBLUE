@@ -51,3 +51,9 @@ src/ft_chatglm_lora/train.sh
 ./src/ft_chatglm_lora/evaluate.sh
 
 ```
+
+
+## Contributors
+
+- [michael-wzhu](https://github.com/michael-wzhu)
+- [boom-R123](https://github.com/boom-R123)

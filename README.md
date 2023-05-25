@@ -29,7 +29,7 @@
 
 ----
 
-[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline) | [中文医疗在线问诊数据集ChatMed_Consult_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_Consult_Dataset) | [中文问诊大模型ChatMed-Consult](https://huggingface.co/michaelwzhu/ChatMed-Consult) | [中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset) |  [中医药大模型ChatMed-TCM](https://huggingface.co/michaelwzhu/ChatMed-TCM) 
+[Text2DT](https://github.com/michael-wzhu/Text2DT_Baseline) | [中文医疗在线问诊数据集ChatMed_Consult_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_Consult_Dataset) | [中文问诊大模型ChatMed-Consult](https://huggingface.co/michaelwzhu/ChatMed-Consult) | [中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset) |  [中医药大模型ChatMed-TCM](https://huggingface.co/michaelwzhu/ChatMed-TCM) | [Candidate-Soups: 提升非自回归翻译模型的有效trick](https://github.com/boom-R123/Candidate_Soups)
 
 
 ## 更新
