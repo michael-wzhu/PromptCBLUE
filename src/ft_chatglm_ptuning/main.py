@@ -202,6 +202,11 @@ def main():
     def preprocess_function_eval(examples):
         inputs, targets = [], []
         for i in range(len(examples[prompt_column])):
+            if not examples[response_column][i]:
+                targets.append("filled in !")
+            else:
+                targets.append(examples[response_column][i])
+
             if examples[prompt_column][i] and examples[response_column][i]:
                 query = examples[prompt_column][i]
                 if history_column is None or len(examples[history_column][i]) == 0:

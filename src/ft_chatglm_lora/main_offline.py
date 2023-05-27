@@ -117,18 +117,18 @@ def main():
     # Load pretrained model and tokenizer
     config = ChatGLMConfig.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
     config.pre_seq_len = model_args.pre_seq_len
     config.prefix_projection = model_args.prefix_projection
 
-    tokenizer = AutoTokenizer.from_pretrained(
+    tokenizer = ChatGLMTokenizer.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
-    model = AutoModel.from_pretrained(
+    model = ChatGLMForConditionalGeneration.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        config=config,
     ).half().cuda()
 
     # for n, p in model.named_parameters():
