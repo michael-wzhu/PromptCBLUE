@@ -18,23 +18,21 @@ Fine-tuning the library models for sequence to sequence.
 """
 # You can also adapt this script on your own sequence to sequence task. Pointers for this are left as comments.
 
+import json
 import logging
 import os
 import sys
-import json
 
+import jieba
 import numpy as np
-from datasets import load_dataset
-import jieba 
-from rouge_chinese import Rouge
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import torch
-
 import transformers
+from datasets import load_dataset
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+from rouge_chinese import Rouge
 from transformers import (
     AutoConfig,
     AutoModel,
-    AutoTokenizer,
     AutoTokenizer,
     DataCollatorForSeq2Seq,
     HfArgumentParser,
@@ -42,13 +40,7 @@ from transformers import (
     set_seed,
 )
 
-import sys
-
 sys.path.append("./")
-
-from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
-from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
-from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
 
 from src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
 
