@@ -115,7 +115,7 @@ def main():
     # print("raw_datasets: ", len(raw_datasets["train"]))
 
     # Load pretrained model and tokenizer
-    config = ChatGLMConfig.from_pretrained(
+    config = AutoConfig.from_pretrained(
         model_args.model_name_or_path,
         trust_remote_code=True
     )
