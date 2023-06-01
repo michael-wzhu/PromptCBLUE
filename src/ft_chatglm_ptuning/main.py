@@ -18,23 +18,21 @@ Fine-tuning the library models for sequence to sequence.
 """
 # You can also adapt this script on your own sequence to sequence task. Pointers for this are left as comments.
 
+import json
 import logging
 import os
 import sys
-import json
 
+import jieba
 import numpy as np
-from datasets import load_dataset
-import jieba 
-from rouge_chinese import Rouge
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import torch
-
 import transformers
+from datasets import load_dataset
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+from rouge_chinese import Rouge
 from transformers import (
     AutoConfig,
     AutoModel,
-    AutoTokenizer,
     AutoTokenizer,
     DataCollatorForSeq2Seq,
     HfArgumentParser,
@@ -42,13 +40,7 @@ from transformers import (
     set_seed,
 )
 
-import sys
-
 sys.path.append("./")
-
-from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
-from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
-from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
 
 from src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
 
@@ -115,39 +107,28 @@ def main():
     # print("raw_datasets: ", raw_datasets)
 
     # Load pretrained model and tokenizer
-    # config = AutoConfig.from_pretrained(
-    #     model_args.model_name_or_path,
-    #     trust_remote_code=True
-    # )
-    config = ChatGLMConfig.from_pretrained(
+    config = AutoConfig.from_pretrained(
         model_args.model_name_or_path,
-        # trust_remote_code=True
+        trust_remote_code=True
     )
     config.pre_seq_len = model_args.pre_seq_len
     config.prefix_projection = model_args.prefix_projection
 
-    # tokenizer = AutoTokenizer.from_pretrained(
-    #     model_args.model_name_or_path,
-    #     trust_remote_code=True
-    # )
-    tokenizer = ChatGLMTokenizer.from_pretrained(
+    tokenizer = AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
-        # trust_remote_code=True
+        trust_remote_code=True
     )
 
     if model_args.ptuning_checkpoint is not None:
         # Evaluation
         # Loading extra state dict of prefix encoder
 
-        # model = AutoModel.from_pretrained(
-        #     model_args.model_name_or_path,
-        #     config=config,
-        #     trust_remote_code=True
-        # )
-        model = ChatGLMForConditionalGeneration.from_pretrained(
+        model = AutoModel.from_pretrained(
             model_args.model_name_or_path,
             config=config,
+            trust_remote_code=True
         )
+
         prefix_state_dict = torch.load(os.path.join(model_args.ptuning_checkpoint, "pytorch_model.bin"))
         new_prefix_state_dict = {}
         for k, v in prefix_state_dict.items():
@@ -155,14 +136,10 @@ def main():
                 new_prefix_state_dict[k[len("transformer.prefix_encoder."):]] = v
         model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
     else:
-        # model = AutoModel.from_pretrained(
-        #     model_args.model_name_or_path,
-        #     config=config,
-        #     trust_remote_code=True
-        # )
-        model = ChatGLMForConditionalGeneration.from_pretrained(
+        model = AutoModel.from_pretrained(
             model_args.model_name_or_path,
             config=config,
+            trust_remote_code=True
         )
 
     if model_args.quantization_bit is not None:
@@ -202,6 +179,11 @@ def main():
     def preprocess_function_eval(examples):
         inputs, targets = [], []
         for i in range(len(examples[prompt_column])):
+            if not examples[response_column][i]:
+                targets.append("filled in !")
+            else:
+                targets.append(examples[response_column][i])
+
             if examples[prompt_column][i] and examples[response_column][i]:
                 query = examples[prompt_column][i]
                 if history_column is None or len(examples[history_column][i]) == 0:
