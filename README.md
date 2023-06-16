@@ -239,7 +239,7 @@ PromptCBLUE-CCKS2023评测的钉钉群为：
     <br>
 </p>
 
-PromptCBLUE与大模型技术交流微信交流群二维码（截止至5月15日有效）：
+PromptCBLUE与大模型技术交流微信交流群二维码（截止至6月23日有效）：
 <p align="left">
     <br>
     <img src="./pics/wechat_qrcode.jpg" width="300"/>
