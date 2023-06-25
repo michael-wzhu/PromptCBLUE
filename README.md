@@ -22,9 +22,16 @@
 
 同时，为辅助LLM在医疗领域的各项能力提升，我们同时开源以下数据/模型资源供参赛者使用：
 - 🚀 [中文医疗在线问诊数据集ChatMed_Consult_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_Consult_Dataset)：包含50w+在线问诊+ChatGPT回复。
-- 🚀 [中文问诊大模型ChatMed-Consult](https://huggingface.co/michaelwzhu/ChatMed-Consult) : 以[中文医疗在线问诊数据集ChatMed_Consult_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_Consult_Dataset)作为微调训练集。模型主干为[LlaMA-7b](https://github.com/facebookresearch/llama),融合了[Chinese-LlaMA-Alpaca](https://github.com/ymcui/Chinese-LLaMA-Alpaca)的LoRA权重与中文扩展词表，然后再进行基于LoRA的参数高效微调。我们将全部数据和代码都进行了公开，详见[ChatMed项目](https://github.com/michael-wzhu/ChatMed)。
-- ⏳ [中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset)。以我们开源的[中医药知识图谱](https://github.com/ywjawmw/TCM_KG)为基础，采用[以实体为中心的自指令方法(entity-centric self-instruct)](https://github.com/michael-wzhu/ChatMed/blob/main/src/)，调用ChatGPT得到2.6w+的围绕中医药的指令数据。
-- ⏳ [中医药大模型ChatMed-TCM](https://huggingface.co/michaelwzhu/ChatMed-TCM) : 大模型赋能中医药传承。这一模型的训练数据为[中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset)。ChatMed-TCM模型也是以LlaMA为底座，采用LoRA微调得到。
+- 🚀 [中文问诊大模型ChatMed-Consult](https://huggingface.co/michaelwzhu/ChatMed-Consult) : 
+  - 以[中文医疗在线问诊数据集ChatMed_Consult_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_Consult_Dataset)作为微调训练集。
+  - 模型主干为[LlaMA-7b](https://github.com/facebookresearch/llama),融合了[Chinese-LlaMA-Alpaca](https://github.com/ymcui/Chinese-LLaMA-Alpaca)的LoRA权重与中文扩展词表，然后再进行基于LoRA的参数高效微调。
+  - 我们将全部数据和代码都进行了公开，详见[ChatMed项目](https://github.com/michael-wzhu/ChatMed)。
+- 🚀 [中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset): 
+  - 以我们开源的[中医药知识图谱](https://github.com/ywjawmw/TCM_KG)为基础，
+  - 采用[以实体为中心的自指令方法(entity-centric self-instruct)](https://github.com/michael-wzhu/ChatMed/blob/main/src/)，调用ChatGPT得到2.6w+的围绕中医药的指令数据。
+- 🚀 [中医药大模型ChatMed-TCM](https://huggingface.co/michaelwzhu/ChatMed-TCM) : 
+  - 大模型赋能中医药传承。这一模型的训练数据为[中医药指令数据集ChatMed_TCM_Dataset](https://huggingface.co/datasets/michaelwzhu/ChatMed_TCM_Dataset)。
+  - ChatMed-TCM模型也是以LlaMA为底座，采用LoRA微调得到。
 
 
 ----
@@ -33,6 +40,8 @@
 
 
 ## 更新
+
+2023/06/25 测试ChatGPT在四千tokens长度以内，采用In-context learning模式，完成PromptCBLUE评测表现！
 
 2023/05/12 更新ChatGLM-6B + Lora方法在dev集表现(在相同训练步数，相同最大长度限制下，比p-tuning表现较好)。同时添加baseline代码的[requirements.txt](./requirements.txt)
 
@@ -50,14 +59,14 @@
 ### PromptCBLUE总体统计
 
 
-| PromptCBLUE      | -     |
-|-------------|-------|
-| 版本号         | v0.1  |
-| prompt 模板数量 | 94    |
-| 训练集         | 68500 |
-| 验证集         | 10270 |
-| 测试集A        | 10270 |
-| 测试集B        | 10270    |
+| PromptCBLUE      | -      |
+|-------------|--------|
+| 版本号         | v0.2   |
+| prompt 模板数量 | 94     |
+| 训练集         | 68900  |
+| 验证集         | 10360  |
+| 测试集A        | 10320 |
+| 测试集B        | 10320  |
 
 注意，在我们发布的数据集中，我们采用了94个指令微调模板，参赛者在训练数据中可以采用其他模板或者基于ChatGPT等模型生成的指令进行训练，但是在测试集预测时，必须采用数据原本的指令，即只能将测试集样本的input字段直接输入到自己的LLM中进行回复预测。
 
@@ -198,35 +207,38 @@ python src/for_eval/post_generate_process.py datasets/PromptCBLUE/toy_examples/t
 
 我们基于[ChatGLM-6B模型](https://github.com/THUDM/ChatGLM-6B)构建PromptCBLUE的baseline模型。代码和运行操作详见[PromptCBLUE-baseline模型](https://github.com/michael-wzhu/PromptCBLUE/blob/main/src/)。我们考虑以下baseline方法:
 
-- 基于ChatGLM-6B模型，在PromptCBLUE的训练集(68500个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=3000)；
+- 基于[ChatGLM-6B模型](https://github.com/THUDM/ChatGLM-6B)模型，在PromptCBLUE的训练集(68900个样本)上采用p-tuning的参数高效微调方法进行微调(bsz=8,gradient accumulation=8, steps=3000)；
 - 基于ChatGLM-6B模型，采用Lora的参数高效微调方法进行微调(bsz=4,lora_rank=8, lora作用在query_key_value,dense,dense_h_to_4h,dense_4h_to_h模块，gradient_accumulation=16, steps=3000)；
+- 基于ChatGLM-6B + AdaLora的微调（实验设置与上述LoRA方法一致，steps=5100）；结果来自[boom-R123](https://github.com/boom-R123)
+
+另外，大家都知道ChatGPT作为强大的大模型，其in-context learning(ICL)能力非常强，所以我们也评测了ChatGPT（截止2023年6月25日）在PromptCBLUE的dev集表现。在预测每个dev样本时，采用训练样本中的同任务下固定的3-20个样例（根据样例长度，尽量塞满ChatGPT的最大允许长度）作为demonstrations，供ChatGPT学习并相应的给出dev样本的预测结果。
 
 
 在dev集上实验结果如下：
 
-| task         | metric    | ChatGLM-6B + ptuning | ChatGLM-6B + LoRA |
-|--------------|-----------|----------------------|-------------------|
-| CMeEE-V2     | micro-F1  | 0.6359               | 0.6725                 |
-| CMeIE        | micro-F1  | 0.3765               | 0.4555            |
-| CHIP-CDN     | micro-F1  | 0.7805               | 0.8461            | 
-| CHIP-CDEE    | micro-F1  | 0.4914               | 0.5456            | 
-| CHIP-STS     | micro-F1  | 0.7696               | 0.8081            |
-| CHIP-CTC     | macro-F1  | 0.8046               | 0.8086            |
-| KUAKE-IR     | micro-F1  | 0.6154               | 0.6835            |
-| KUAKE-QIC    | macro-F1  | 0.8113               | 0.7390            |
-| KUAKE-QQR    | micro-F1  | 0.5537               | 0.6348            |
-| KUAKE-QTR    | micro-F1  | 0.4701               | 0.5428            |
-| CHIP-MDCFNPC | micro-F1  | 0.6865               | 0.7366            |
-| IMCS-V2-DAC  | macro-F1  | 0.7059               | 0.7512            |
-| IMCS-V2-NER  | micro-F1  | 0.8508               | 0.8709            |
-| IMCS-V2-SR   | micro-F1  | 0.6168               | 0.6330            |
-| IMCS-V2-MRG  | Rouge-L   | 0.4707               | 0.4663            |
-| MedDG        | Rouge-L   | 0.1035               | 0.1117            |
-| Overall      | avg score | 0.6090               | 0.6441            |
+| task         | metric    | ChatGLM-6B + ptuning | ChatGLM-6B + LoRA | ChatGLM-6B + LoRA | ChatGPT + ICL |
+|--------------|-----------|----------------------|-------------------|-------------------|---------------|
+| CMeEE-V2     | micro-F1  | 0.6359               | 0.6725            | 0.6634            | 0.4698        |
+| CMeIE        | micro-F1  | 0.3765               | 0.4555            | 0.4290            | 0.3058        |
+| CHIP-CDN     | micro-F1  | 0.7805               | 0.8461            | 0.8465            | 0.6069        |
+| CHIP-CDEE    | micro-F1  | 0.4914               | 0.5456            | 0.5131            | 0.2838        |
+| CHIP-STS     | micro-F1  | 0.7696               | 0.8081            | 0.7618            | 0.7108        |
+| CHIP-CTC     | macro-F1  | 0.8046               | 0.8086            | 0.7398            | 0.5253        |
+| KUAKE-IR     | micro-F1  | 0.6154               | 0.6835            | 0.7657            | 0.5183        |
+| KUAKE-QIC    | macro-F1  | 0.8113               | 0.7390            | 0.8400            | 0.4851        |
+| KUAKE-QQR    | micro-F1  | 0.5537               | 0.6348            | 0.6738            | 0.3040        |
+| KUAKE-QTR    | micro-F1  | 0.4701               | 0.5428            | 0.5076            | 0.2318        |
+| CHIP-MDCFNPC | micro-F1  | 0.6865               | 0.7366            | 0.7531            | 0.5854        |
+| IMCS-V2-DAC  | macro-F1  | 0.7147               | 0.7639            | 0.7168            | 0.3455        |
+| IMCS-V2-NER  | micro-F1  | 0.8508               | 0.8709            | 0.8779            | 0.5684        |
+| IMCS-V2-SR   | micro-F1  | 0.6168               | 0.6330            | 0.6458            | 0.3305        |
+| IMCS-V2-MRG  | Rouge-L   | 0.4707               | 0.4663            | 0.4811            | 0.3253        |
+| MedDG        | Rouge-L   | 0.1035               | 0.1117            | 0.1298            | 0.1361        |
+| Overall      | avg score | 0.6095               | 0.6448            | 0.6466            | 0.4208        |
 
 
 我们将会持续不断地输出各种不同的baseline模型与代码给大家，希望大家持续关注本repo：
-- ⏳ TODO: 更多微调方法(如Parallel-Adapter, AdaLora等)；
+- ⏳ TODO: 更多微调方法(如Parallel-Adapter, BitFit等)；
 - ⏳ TODO: 针对每个任务采用高效微调的方法，在预测时对不同任务调用不同的高效微调模块；
 
 
