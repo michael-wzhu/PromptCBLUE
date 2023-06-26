@@ -18,21 +18,23 @@ Fine-tuning the library models for sequence to sequence.
 """
 # You can also adapt this script on your own sequence to sequence task. Pointers for this are left as comments.
 
-import json
 import logging
 import os
 import sys
+import json
 
-import jieba
 import numpy as np
-import torch
-import transformers
 from datasets import load_dataset
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+import jieba 
 from rouge_chinese import Rouge
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+import torch
+
+import transformers
 from transformers import (
     AutoConfig,
     AutoModel,
+    AutoTokenizer,
     AutoTokenizer,
     DataCollatorForSeq2Seq,
     HfArgumentParser,
@@ -40,7 +42,13 @@ from transformers import (
     set_seed,
 )
 
+import sys
+
 sys.path.append("./")
+
+from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
+from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
+from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
 
 from src.ft_chatglm_ptuning.trainer_seq2seq import Seq2SeqTrainer
 
@@ -99,7 +107,7 @@ def main():
         extension = data_args.test_file.split(".")[-1]
 
     raw_datasets = load_dataset(
-        extension,
+        "json",
         data_files=data_files,
         cache_dir=model_args.cache_dir,
         use_auth_token=True if model_args.use_auth_token else None,
@@ -107,28 +115,39 @@ def main():
     # print("raw_datasets: ", raw_datasets)
 
     # Load pretrained model and tokenizer
-    config = AutoConfig.from_pretrained(
+    # config = AutoConfig.from_pretrained(
+    #     model_args.model_name_or_path,
+    #     trust_remote_code=True
+    # )
+    config = ChatGLMConfig.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
     config.pre_seq_len = model_args.pre_seq_len
     config.prefix_projection = model_args.prefix_projection
 
-    tokenizer = AutoTokenizer.from_pretrained(
+    # tokenizer = AutoTokenizer.from_pretrained(
+    #     model_args.model_name_or_path,
+    #     trust_remote_code=True
+    # )
+    tokenizer = ChatGLMTokenizer.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
 
     if model_args.ptuning_checkpoint is not None:
         # Evaluation
         # Loading extra state dict of prefix encoder
 
-        model = AutoModel.from_pretrained(
+        # model = AutoModel.from_pretrained(
+        #     model_args.model_name_or_path,
+        #     config=config,
+        #     trust_remote_code=True
+        # )
+        model = ChatGLMForConditionalGeneration.from_pretrained(
             model_args.model_name_or_path,
             config=config,
-            trust_remote_code=True
         )
-
         prefix_state_dict = torch.load(os.path.join(model_args.ptuning_checkpoint, "pytorch_model.bin"))
         new_prefix_state_dict = {}
         for k, v in prefix_state_dict.items():
@@ -136,10 +155,14 @@ def main():
                 new_prefix_state_dict[k[len("transformer.prefix_encoder."):]] = v
         model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
     else:
-        model = AutoModel.from_pretrained(
+        # model = AutoModel.from_pretrained(
+        #     model_args.model_name_or_path,
+        #     config=config,
+        #     trust_remote_code=True
+        # )
+        model = ChatGLMForConditionalGeneration.from_pretrained(
             model_args.model_name_or_path,
             config=config,
-            trust_remote_code=True
         )
 
     if model_args.quantization_bit is not None:
@@ -177,6 +200,8 @@ def main():
     max_target_length = data_args.max_target_length
 
     def preprocess_function_eval(examples):
+        # print("examples: ", examples)
+
         inputs, targets = [], []
         for i in range(len(examples[prompt_column])):
             if not examples[response_column][i]:
@@ -184,7 +209,7 @@ def main():
             else:
                 targets.append(examples[response_column][i])
 
-            if examples[prompt_column][i] and examples[response_column][i]:
+            if examples[prompt_column][i]:
                 query = examples[prompt_column][i]
                 if history_column is None or len(examples[history_column][i]) == 0:
                     prompt = query
@@ -195,9 +220,9 @@ def main():
                         prompt += "[Round {}]\n问：{}\n答：{}\n".format(turn_idx, old_query, response)
                     prompt += "[Round {}]\n问：{}\n答：".format(len(history), query)
                 inputs.append(prompt)
-                targets.append(examples[response_column][i])
 
         inputs = [prefix + inp for inp in inputs]
+        # print("inputs: ", inputs)
         model_inputs = tokenizer(inputs, max_length=data_args.max_source_length, truncation=True, padding=True)
         labels = tokenizer(text_target=targets, max_length=max_target_length, truncation=True)
 
@@ -278,7 +303,7 @@ def main():
                 batched=True,
                 num_proc=data_args.preprocessing_num_workers,
                 remove_columns=column_names,
-                load_from_cache_file=not data_args.overwrite_cache,
+                load_from_cache_file=False,
                 desc="Running tokenizer on train dataset",
             )
         print_dataset_example(train_dataset[0])
@@ -289,16 +314,13 @@ def main():
         if "validation" not in raw_datasets:
             raise ValueError("--do_eval requires a validation dataset")
         eval_dataset = raw_datasets["validation"]
-        if data_args.max_eval_samples is not None:
-            max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
-            eval_dataset = eval_dataset.select(range(max_eval_samples))
         with training_args.main_process_first(desc="validation dataset map pre-processing"):
             eval_dataset = eval_dataset.map(
                 preprocess_function_eval,
                 batched=True,
                 num_proc=data_args.preprocessing_num_workers,
                 remove_columns=column_names,
-                load_from_cache_file=not data_args.overwrite_cache,
+                load_from_cache_file=False,
                 desc="Running tokenizer on validation dataset",
             )
         print_dataset_example(eval_dataset[0])
@@ -309,16 +331,14 @@ def main():
         if "test" not in raw_datasets:
             raise ValueError("--do_predict requires a test dataset")
         predict_dataset = raw_datasets["test"]
-        if data_args.max_predict_samples is not None:
-            max_predict_samples = min(len(predict_dataset), data_args.max_predict_samples)
-            predict_dataset = predict_dataset.select(range(max_predict_samples))
+        # print("predict_dataset: ", predict_dataset)
         with training_args.main_process_first(desc="prediction dataset map pre-processing"):
             predict_dataset = predict_dataset.map(
                 preprocess_function_eval,
                 batched=True,
                 num_proc=data_args.preprocessing_num_workers,
                 remove_columns=column_names,
-                load_from_cache_file=not data_args.overwrite_cache,
+                load_from_cache_file=False,
                 desc="Running tokenizer on prediction dataset",
             )
         print_dataset_example(predict_dataset[0])
@@ -355,7 +375,11 @@ def main():
             hypothesis = list(jieba.cut(pred))
             reference = list(jieba.cut(label))
             rouge = Rouge()
-            scores = rouge.get_scores(' '.join(hypothesis) , ' '.join(reference))
+
+            hypothesis = ' '.join(hypothesis)
+            if not hypothesis:
+                hypothesis = "-"
+            scores = rouge.get_scores(hypothesis, ' '.join(reference))
             result = scores[0]
             
             for k, v in result.items():

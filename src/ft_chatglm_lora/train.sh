@@ -3,7 +3,7 @@ lora_trainable="query_key_value,dense,dense_h_to_4h,dense_4h_to_h"
 modules_to_save="null"
 lora_dropout=0.1
 LR=2e-4
-model_name_or_path="THUDM/chatglm-6b"   # LLM底座模型路径，或者是huggingface hub上的模型名称
+model_name_or_path="/public/home/xlwang2/codes/Med_Prompts/models--THUDM--chatglm-6b/snapshots/a8ede826cf1b62bd3c78bdfb3625c7c5d2048fbd"   # LLM底座模型路径，或者是huggingface hub上的模型名称
 your_data_path="./datasets/PromptCBLUE/toy_examples"  # 填入数据集所在的文件夹路径
 your_checkpopint_path="./experiments/outputs/"  # 填入用来存储模型的路径
 

@@ -4,6 +4,15 @@
 
 我们根据我们实验所用的环境生成了[requirements.txt](./requirements.txt)。参赛者可以自行配置版本更高的环境。
 
+## 模型下载
+
+先将ChatGLM权重下载到本地。通过下面的命令，
+```bash
+python src/download_checkpoints.py
+```
+模型会存放在类似于`./models--THUDM--chatglm-6b/snapshots/a8ede826cf1b62bd3c78bdfb3625c7c5d2048fbd`的路径中，加载模型时候就是采用这个路径。
+
+
 ##  数据
 
 请前往[PromptCBLUE通用赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532085/introduction)或者[PromptCBLUE通用赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532084/introduction)下载训练集，验证集以及测试集A或者测试集B。这些数据放置在自己指定的文件夹中，如"datasets/PromptCBLUE/toy_examples"。
