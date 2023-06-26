@@ -6,7 +6,7 @@ STEP=2000    # 用来评估的模型checkpoint是训练了多少步
 CUDA_VISIBLE_DEVICES=2 python medical_prompts/src/ft_chatglm_ptuning/main.py \
     --do_predict \
     --validation_file $your_data_path/dev.json \
-    --test_file $your_data_path/dev.json \
+    --test_file $your_data_path/test.json \
     --overwrite_cache \
     --prompt_column input \
     --response_column target \
