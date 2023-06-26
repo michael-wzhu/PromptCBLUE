@@ -368,7 +368,8 @@ def main():
                 hypothesis = "-"
             scores = rouge.get_scores(hypothesis, ' '.join(reference))
             result = scores[0]
-            
+
+
             for k, v in result.items():
                 score_dict[k].append(round(v["f"] * 100, 4))
             bleu_score = sentence_bleu([list(label)], list(pred), smoothing_function=SmoothingFunction().method3)
