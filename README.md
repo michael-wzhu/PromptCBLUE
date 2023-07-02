@@ -41,6 +41,8 @@
 
 ## 更新
 
+2023/07/02 开源PromptCBLUE的各个prompt模板；同时，对模板采用ChatGPT进行扩充，将会把提示模板扩展到500个左右。
+
 2023/06/25 测试ChatGPT在四千tokens长度以内，采用In-context learning模式，完成PromptCBLUE评测表现！
 
 2023/05/12 更新ChatGLM-6B + Lora方法在dev集表现(在相同训练步数，相同最大长度限制下，比p-tuning表现较好)。同时添加baseline代码的[requirements.txt](./requirements.txt)

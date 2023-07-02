@@ -1,0 +1,125 @@
+{
+  "CMeEE-V2": [
+    "找出指定的实体：\\n[INPUT_TEXT]\\n类型选项：[LIST_LABELS]\\n答：",
+    "找出指定的实体：\\n[INPUT_TEXT]\\n实体类型选项：[LIST_LABELS]\\n答：",
+    "找出句子中的[LIST_LABELS]实体：\\n[INPUT_TEXT]\\n答：",
+    "[INPUT_TEXT]\\n问题：句子中的[LIST_LABELS]实体是什么？\\n答：",
+    "生成句子中的[LIST_LABELS]实体：\\n[INPUT_TEXT]\\n答：",
+    "下面句子中的[LIST_LABELS]实体有哪些？\\n[INPUT_TEXT]\\n答：",
+    "实体抽取：\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答：",
+    "医学实体识别：\\n[INPUT_TEXT]\\n实体选项：[LIST_LABELS]\\n答："
+  ],
+  "CMeIE": [
+    "找出指定的三元组：\\n[INPUT_TEXT]\\n实体间关系：[LIST_LABELS]\\n答：",
+    "根据给定的实体间的关系，抽取具有这些关系的实体对：\\n[INPUT_TEXT]\\n实体间关系标签：[LIST_LABELS]\\n答：",
+    "找出句子中的具有[LIST_LABELS]关系类型的头尾实体对：\\n[INPUT_TEXT]\\n答：",
+    "[INPUT_TEXT]\\n问题：句子中的[LIST_LABELS]等关系类型三元组是什么？\\n答：",
+    "给出句子中的[LIST_LABELS]等关系类型的实体对：[INPUT_TEXT]\\n答：",
+    "[INPUT_TEXT]\\n这个句子里面具有一定医学关系的实体组有哪些？\\n三元组关系选项：[LIST_LABELS]\\n答：",
+    "同时完成实体识别与关系识别：\\n[INPUT_TEXT]\\n三元组关系类型：[LIST_LABELS]\\n答："
+  ],
+  "CHIP-CDN": [
+    "给出下面诊断原词的标准化：\\n[INPUT_TEXT]\\n候选集：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "找出归一后的标准词：\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "诊断归一化：\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "诊断实体的语义标准化：\\n[INPUT_TEXT]\\n实体选项：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "给出诊断的归一化：\\n[INPUT_TEXT]\\n医学实体选项：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "[INPUT_TEXT]\\n归一化后的标准词是？\\n实体选项：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答：",
+    "实体归一化：\\n[INPUT_TEXT]\\n实体候选：[LIST_LABELS]\\n说明：从候选的若干个ICD-10诊断标准词中选择出与原诊断描述匹配的词\\n答："
+  ],
+  "CHIP-CDEE": [
+    "临床发现事件抽取：\\n[INPUT_TEXT]\\n说明：临床发现事件的主体词包含发生状态，描述词和解剖部位这三种属性，其中描述词和解剖部位可能有多个值\\n答：",
+    "找出指定的临床发现事件属性：\\n[INPUT_TEXT]\\n事件抽取说明：临床发现事件由主体词，发生状态，描述词和解剖部位组成\\n答：",
+    "找出句子中的临床发现事件及其属性：\\n [INPUT_TEXT]\\n说明：临床发现事件的主体词包含发生状态，描述词和解剖部位这三种属性，其中描述词和解剖部位可能有多个值\\n答：",
+    "[INPUT_TEXT]\\n问题：句子中的临床发现事件及其属性是什么？\\n说明：临床发现事件由主体词，发生状态，描述词和解剖部位组成\\n答：",
+    "生成句子中的临床发现事件属性是：\\n[INPUT_TEXT]\\n说明：临床发现事件的主体词包含发生状态，描述词和解剖部位这三种属性，其中描述词和解剖部位可能有多个值\\n答：",
+    "[INPUT_TEXT]\\n这个句子里面临床发现事件是？\\n说明：临床发现事件由主体词，发生状态，描述词和解剖部位组成\\n答：",
+    "临床发现事件抽取：[INPUT_TEXT]\\n说明：临床发现事件的主体词包含发生状态，描述词和解剖部位这三种属性，其中描述词和解剖部位可能有多个值\\n答："
+  ],
+  "CHIP-STS": [
+    "以下两句话的意思相同的吗？\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”\\n选项：是的，不是\\n答：",
+    "我想知道下面两句话的意思是否相同。\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项：是的，不是\\n答：",
+    "我是否可以用以下的句子：“[INPUT_TEXT_1]”，来替换这个句子：“[INPUT_TEXT_2]”，并且它们有相同的意思？\\n选项：是的，不是\\n答：",
+    "下面两个句子语义是“相同”或“不同”？\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项：相同，不同\\n答：",
+    "“[INPUT_TEXT_1]”和“[INPUT_TEXT_2]”是同一个意思吗？\\n选项：是的，不是\\n答：",
+    "“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n这两句是一样的意思吗？\\n选项：是的，不是\\n答："
+  ],
+  "CHIP-CTC": [
+    "判断临床试验筛选标准的类型：\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答：",
+    "确定试验筛选标准的类型：\\n[INPUT_TEXT]\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n这句话是什么临床试验筛选标准类型？\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n是什么临床试验筛选标准类型？\\n选项：[LIST_LABELS]\\n答：",
+    "请问是什么类型？\\n[INPUT_TEXT]\\n临床试验筛选标准选项：[LIST_LABELS]\\n答："
+  ],
+  "KUAKE-IR": [
+    "以下回答内容是否与这里的医疗搜索相关？\\n医疗搜索：[INPUT_TEXT_1]\\n回答内容：[INPUT_TEXT_2]\\n选项: [LIST_LABELS]\\n答：",
+    "医疗搜索：[INPUT_TEXT_1]\\n以下回答内容是否能够回答搜索问题？\\n回答内容：[INPUT_TEXT_2]\\n选项: [LIST_LABELS]\\n答：",
+    "医疗搜索：[INPUT_TEXT_1]\\n回答内容：[INPUT_TEXT_2]\\n上述搜索和回答是否相关？\\n选项: [LIST_LABELS]\\n答："
+  ],
+  "KUAKE-QIC": [
+    "判断下面搜索词的意图：\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答：",
+    "确定检索词的类型：\\n[INPUT_TEXT]\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n这个搜索是什么意图？\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n这个医疗搜索词是什么意图分类？\\n选项：[LIST_LABELS]\\n答：",
+    "请问是什么意图类型？\\n[INPUT_TEXT]\\n搜索意图选项：[LIST_LABELS]\\n答："
+  ],
+  "KUAKE-QQR": [
+    "判断两个查询所表述的主题的匹配程度：\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项：[LIST_LABELS]\\n答：",
+    "我想知道下面两个搜索词的意思有多相同。\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项：[LIST_LABELS]\\n答：",
+    "下面两个句子的语义关系是？\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项: [LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”和“[INPUT_TEXT_2]”表述的主题完全一致吗？\\n选项：[LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”和“[INPUT_TEXT_2]”的意思有多相似？\\n选项：[LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n这两句是一样的意思吗？\\n选项：[LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n这两句的语义关系是？\\n选项：[LIST_LABELS]\\n答："
+  ],
+  "KUAKE-QTR": [
+    "以下两句话的意思相同的吗？\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n选项：[LIST_LABELS]\\n答：",
+    "我想知道下面两句话的意思有多相似。\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”\\n选项：[LIST_LABELS]\\n答：",
+    "下面的搜索词和页面标签的意思有多相同？\\n搜索词：[INPUT_TEXT_1]\\n页面标签：[INPUT_TEXT_2]\\n选项：[LIST_LABELS]\\n答：",
+    "下面两个句子的语义相似程度是[LIST_LABELS]中的哪一种？\\n“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”\\n答：",
+    "“[INPUT_TEXT_1]”和“[INPUT_TEXT_2]”是同一个意思吗？\\n选项：[LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”和“[INPUT_TEXT_2]”的意思有多相似？\\n选项：[LIST_LABELS]\\n答：",
+    "“[INPUT_TEXT_1]”，“[INPUT_TEXT_2]”。\\n这两句话的意思的匹配程度如何？\\n选项：[LIST_LABELS]\\n答：",
+    "搜索词：“[INPUT_TEXT_1]”。页面标题：“[INPUT_TEXT_2]”。这两句是一样的意思吗？选项：[LIST_LABELS]\\n答："
+  ],
+  "CHIP-MDCFNPC": [
+    "医疗对话中临床发现实体的阴阳性判别：\\n[INPUT_TEXT]\\n临床发现实体：[LIST_MENTIONS]\\n阴阳性选项：[LIST_LABELS]\\n说明：临床发现是临床医学下，病人状态描述的概念集合\\n答：",
+    "给出对话中临床发现实体的阴阳性判断：\\n[INPUT_TEXT]\\n临床发现实体：[LIST_MENTIONS]\\n阴阳性选项：[LIST_LABELS]\\n说明：临床发现是临床医学下，病人状态描述的概念集合\\n答：",
+    "对下述对话中的临床发现标识阴阳性：\\n[INPUT_TEXT]\\n临床发现实体：[LIST_MENTIONS]\\n阴阳性选项：[LIST_LABELS]\\n说明：临床发现是临床医学下，病人状态描述的概念集合\\n答：",
+    "[INPUT_TEXT]\\n问题：我们已经给出问诊对话中的临床发现，请问这些实体的阴阳性是？\\n临床发现实体：[LIST_MENTIONS]\\n阴阳性选项：[LIST_LABELS]\\n说明：临床发现是临床医学下，病人状态描述的概念集合\\n答："
+  ],
+  "IMCS-V2-DAC": [
+    "判断下面问诊对话最后一句的意图:\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答：",
+    "确定问诊对话当前句子的意图:\\n[INPUT_TEXT]\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n问诊对话的最后一话是什么意图？\\n类型选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n最后的问诊句子是什么意图分类？\\n选项：[LIST_LABELS]\\n答：",
+    "请问最后一句对话是什么意图类型？\\n[INPUT_TEXT]\\n意图选项：[LIST_LABELS]\\n答："
+  ],
+  "IMCS-V2-NER": [
+    "找出下面问诊语句中的[LIST_LABELS]实体：\\n[INPUT_TEXT]\\n答：",
+    "找出下面句子中的[LIST_LABELS]实体：\\n[INPUT_TEXT]\\n答：",
+    "[INPUT_TEXT]\\n问题：上述对话中的[LIST_LABELS]实体是哪些？\\n答：",
+    "[INPUT_TEXT]\\n上述问诊中的[LIST_LABELS]实体是什么？\\n答：",
+    "下面对话中的[LIST_LABELS]实体有哪些？\\n[INPUT_TEXT]\\n答：",
+    "问诊对话的实体抽取：[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答："
+  ],
+  "IMCS-V2-SR": [
+    "找出当前对话中的症状，并判断阴阳性：\\n[INPUT_TEXT]\\n症状阴阳性选项：[LIST_LABELS]\\n答：",
+    "根据对话历史和当前对话，抽取症状实体，以及这些实体的阴阳性：\\n[INPUT_TEXT]\\n候选：[LIST_LABELS]\\n答：",
+    "当前对话涉及哪些症状？这些症状的阴阳性如何？\\n[INPUT_TEXT]\\n选项：[LIST_LABELS]\\n答：",
+    "[INPUT_TEXT]\\n根据上述对话，症状有哪些？这些症状的阴阳性是？\\n选项：[LIST_LABELS]\\n答："
+  ],
+  "IMCS-V2-MRG": [
+    "根据下面的问诊对话自动生成对应的诊疗报告：\\n[INPUT_TEXT]\\n说明：诊疗报告分为主诉, 现病史, 辅助检查, 既往史, 诊断, 建议这六个章节。\\n答：",
+    "帮助患者自动总结问诊的诊疗报告：\\n[INPUT_TEXT]\\n说明：诊疗报告分为主诉, 现病史, 辅助检查, 既往史, 诊断, 建议这六个章节。\\n答：",
+    "总结下面问诊对话，并给出问诊报告\\n[INPUT_TEXT]\\n说明：诊疗报告分为主诉, 现病史, 辅助检查, 既往史, 诊断, 建议这六个章节。\\n答：",
+    "[INPUT_TEXT]\\n根据上述对话，给出诊疗报告\\n说明：诊疗报告分为主诉, 现病史, 辅助检查, 既往史, 诊断, 建议这六个章节。\\n答："
+  ],
+  "MedDG": [
+    "根据医生和患者交流的对话历史预测出医生的下一句回复：\\n[INPUT_TEXT]\\n答：",
+    "自动生成问诊对话中的医生下一句回复：\\n[INPUT_TEXT]\\n答：",
+    "根据下面的问诊对话历史，给出医生的下一句回复\\n[INPUT_TEXT]\\n答：",
+    "[INPUT_TEXT]\\n根据上述对话历史，给出医生的下一句话\\n答：",
+    "[INPUT_TEXT]\\n根据上述对话历史，作为医生应该如何回复？\\n答："
+  ]
+}
