@@ -18,20 +18,23 @@ Fine-tuning the library models for sequence to sequence.
 """
 # You can also adapt this script on your own sequence to sequence task. Pointers for this are left as comments.
 
-import json
 import logging
 import os
 import sys
+import json
 
-import jieba
 import numpy as np
-import transformers
 from datasets import load_dataset
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+import jieba 
 from rouge_chinese import Rouge
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+import torch
+
+import transformers
 from transformers import (
     AutoConfig,
     AutoModel,
+    AutoTokenizer,
     AutoTokenizer,
     DataCollatorForSeq2Seq,
     HfArgumentParser,
@@ -39,12 +42,16 @@ from transformers import (
     set_seed,
 )
 
+import sys
 sys.path.append("./")
 
+from src.ft_chatglm_ptuning.tokenization_chatglm import ChatGLMTokenizer
+from src.ft_chatglm_ptuning.configuration_chatglm import ChatGLMConfig
+from src.ft_chatglm_ptuning.modeling_chatglm import ChatGLMForConditionalGeneration
 from src.ft_chatglm_lora.trainer_seq2seq import Seq2SeqTrainer
 from src.ft_chatglm_lora.arguments import ModelArguments, DataTrainingArguments
 
-from peft import PeftModel, LoraConfig, TaskType, get_peft_model
+from peft import PeftModel, LoraConfig, TaskType, get_peft_model, get_peft_model_state_dict
 
 logger = logging.getLogger(__name__)
 
@@ -108,20 +115,20 @@ def main():
     # print("raw_datasets: ", len(raw_datasets["train"]))
 
     # Load pretrained model and tokenizer
-    config = AutoConfig.from_pretrained(
+    config = ChatGLMConfig.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
     config.pre_seq_len = model_args.pre_seq_len
     config.prefix_projection = model_args.prefix_projection
 
-    tokenizer = AutoTokenizer.from_pretrained(
+    tokenizer = ChatGLMTokenizer.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        # trust_remote_code=True
     )
-    model = AutoModel.from_pretrained(
+    model = ChatGLMForConditionalGeneration.from_pretrained(
         model_args.model_name_or_path,
-        trust_remote_code=True
+        config=config,
     ).half().cuda()
 
     # for n, p in model.named_parameters():
@@ -356,9 +363,13 @@ def main():
             hypothesis = list(jieba.cut(pred))
             reference = list(jieba.cut(label))
             rouge = Rouge()
-            scores = rouge.get_scores(' '.join(hypothesis) , ' '.join(reference))
+            hypothesis = ' '.join(hypothesis)
+            if not hypothesis:
+                hypothesis = "-"
+            scores = rouge.get_scores(hypothesis, ' '.join(reference))
             result = scores[0]
-            
+
+
             for k, v in result.items():
                 score_dict[k].append(round(v["f"] * 100, 4))
             bleu_score = sentence_bleu([list(label)], list(pred), smoothing_function=SmoothingFunction().method3)
