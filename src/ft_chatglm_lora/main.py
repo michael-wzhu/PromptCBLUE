@@ -447,9 +447,10 @@ def main():
             metric_key_prefix="predict",
             # max_tokens=512,
             max_new_tokens=data_args.max_target_length,
-            do_sample=True,
-            top_p=0.7,
-            temperature=0.95,
+            do_sample=False,
+            num_beams=1,
+            # top_p=0.7,
+            # temperature=0.95,
             # repetition_penalty=1.1
         )
         metrics = predict_results.metrics

@@ -9,7 +9,7 @@ CHECKPOINT="./experiments/outputs/PromptCBLUE-chatglm-6b-lora-2e-4"   # 填入�
 
 STEP=10    # 用来评估的模型checkpoint是训练了多少步
 
-CUDA_VISIBLE_DEVICES=1 python src/ft_chatglm_lora/main.py \
+CUDA_VISIBLE_DEVICES=3 python src/ft_chatglm_lora/main.py \
     --do_predict \
     --do_eval \
     --validation_file $your_data_path/dev.json \
@@ -24,5 +24,5 @@ CUDA_VISIBLE_DEVICES=1 python src/ft_chatglm_lora/main.py \
     --overwrite_output_dir \
     --max_source_length 828 \
     --max_target_length 196 \
-    --per_device_eval_batch_size 1 \
+    --per_device_eval_batch_size 4 \
     --predict_with_generate
