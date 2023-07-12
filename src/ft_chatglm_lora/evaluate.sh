@@ -11,7 +11,6 @@ STEP=10    # 用来评估的模型checkpoint是训练了多少步
 
 CUDA_VISIBLE_DEVICES=3 python src/ft_chatglm_lora/main.py \
     --do_predict \
-    --do_eval \
     --validation_file $your_data_path/dev.json \
     --test_file $your_data_path/test.json \
     --cache_dir $your_data_path \
@@ -24,5 +23,7 @@ CUDA_VISIBLE_DEVICES=3 python src/ft_chatglm_lora/main.py \
     --overwrite_output_dir \
     --max_source_length 828 \
     --max_target_length 196 \
-    --per_device_eval_batch_size 4 \
+    --per_device_eval_batch_size 8 \
     --predict_with_generate
+
+#     --do_eval \

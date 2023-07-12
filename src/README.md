@@ -56,10 +56,16 @@ src/ft_chatglm_lora/train.sh
 
 ### 预测(生成回复)
 
+预测时，可以根据自身判断，选择调整`src/ft_chatglm_lora/main.py`代码的445行到455行的模型生成设置，比如`num_beams`, `do_sample`等。我们现在设置`do_sample=False`和`num_beams=1`，即采用贪心解码。自然地，设置更大的`num_beams`相应的可以提升生成效果，不过也会带来显存压力。
+
+同时，大家根据卡的显存，设置下面脚本中的`per_device_eval_batch_size`取值。我们目前的生成设置和脚本设置的入参，推理需要25G显存，在V100 (40G)上单卡5个小时左右跑完测试集。
+
 ```bash
 ./src/ft_chatglm_lora/evaluate.sh
 
 ```
+
+预测效率提升有很多途径：包括模型量化，或者使用推理框架，如vLLM。
 
 
 ## Contributors

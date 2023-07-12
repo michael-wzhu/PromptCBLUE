@@ -449,6 +449,7 @@ def main():
             max_new_tokens=data_args.max_target_length,
             do_sample=False,
             num_beams=1,
+            use_cache=True,
             # top_p=0.7,
             # temperature=0.95,
             # repetition_penalty=1.1
