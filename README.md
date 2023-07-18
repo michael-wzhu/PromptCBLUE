@@ -41,6 +41,8 @@
 
 ## 更新
 
+2023/07/18 添加了基于LlaMA的LoRA微调代码；并且使用vllm对模型推理加速(相比于huggingface的生成加速2.5倍左右)。
+
 2023/07/02 开源PromptCBLUE的各个prompt模板；同时，对模板采用ChatGPT进行扩充，将会把提示模板扩展到500个左右。
 
 2023/06/25 测试ChatGPT在四千tokens长度以内，采用In-context learning模式，完成PromptCBLUE评测表现！
