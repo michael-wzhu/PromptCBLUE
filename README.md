@@ -220,25 +220,25 @@ python src/for_eval/post_generate_process.py datasets/PromptCBLUE/toy_examples/t
 
 在dev集上实验结果如下：
 
-| task         | metric    | ChatGLM-6B + ptuning | ChatGLM-6B + LoRA | ChatGLM-6B + LoRA | ChatGPT + ICL |
-|--------------|-----------|----------------------|-------------------|-------------------|---------------|
-| CMeEE-V2     | micro-F1  | 0.6359               | 0.6725            | 0.6634            | 0.4698        |
-| CMeIE        | micro-F1  | 0.3765               | 0.4555            | 0.4290            | 0.3058        |
-| CHIP-CDN     | micro-F1  | 0.7805               | 0.8461            | 0.8465            | 0.6069        |
-| CHIP-CDEE    | micro-F1  | 0.4914               | 0.5456            | 0.5131            | 0.2838        |
-| CHIP-STS     | micro-F1  | 0.7696               | 0.8081            | 0.7618            | 0.7108        |
-| CHIP-CTC     | macro-F1  | 0.8046               | 0.8086            | 0.7398            | 0.5253        |
-| KUAKE-IR     | micro-F1  | 0.6154               | 0.6835            | 0.7657            | 0.5183        |
-| KUAKE-QIC    | macro-F1  | 0.8113               | 0.7390            | 0.8400            | 0.4851        |
-| KUAKE-QQR    | micro-F1  | 0.5537               | 0.6348            | 0.6738            | 0.3040        |
-| KUAKE-QTR    | micro-F1  | 0.4701               | 0.5428            | 0.5076            | 0.2318        |
-| CHIP-MDCFNPC | micro-F1  | 0.6865               | 0.7366            | 0.7531            | 0.5854        |
-| IMCS-V2-DAC  | macro-F1  | 0.7147               | 0.7639            | 0.7168            | 0.3455        |
-| IMCS-V2-NER  | micro-F1  | 0.8508               | 0.8709            | 0.8779            | 0.5684        |
-| IMCS-V2-SR   | micro-F1  | 0.6168               | 0.6330            | 0.6458            | 0.3305        |
-| IMCS-V2-MRG  | Rouge-L   | 0.4707               | 0.4663            | 0.4811            | 0.3253        |
-| MedDG        | Rouge-L   | 0.1035               | 0.1117            | 0.1298            | 0.1361        |
-| Overall      | avg score | 0.6095               | 0.6448            | 0.6466            | 0.4208        |
+| task         | metric    | ChatGLM-6B + ptuning | ChatGLM-6B + LoRA | ChatGLM-6B + AdaLoRA | ChatGPT + ICL |
+|--------------|-----------|----------------------|-------------------|----------------------|---------------|
+| CMeEE-V2     | micro-F1  | 0.6359               | 0.6725            | 0.6634               | 0.4698        |
+| CMeIE        | micro-F1  | 0.3765               | 0.4555            | 0.4290               | 0.3058        |
+| CHIP-CDN     | micro-F1  | 0.7805               | 0.8461            | 0.8465               | 0.6069        |
+| CHIP-CDEE    | micro-F1  | 0.4914               | 0.5456            | 0.5131               | 0.2838        |
+| CHIP-STS     | micro-F1  | 0.7696               | 0.8081            | 0.7618               | 0.7108        |
+| CHIP-CTC     | macro-F1  | 0.8046               | 0.8086            | 0.7398               | 0.5253        |
+| KUAKE-IR     | micro-F1  | 0.6154               | 0.6835            | 0.7657               | 0.5183        |
+| KUAKE-QIC    | macro-F1  | 0.8113               | 0.7390            | 0.8400               | 0.4851        |
+| KUAKE-QQR    | micro-F1  | 0.5537               | 0.6348            | 0.6738               | 0.3040        |
+| KUAKE-QTR    | micro-F1  | 0.4701               | 0.5428            | 0.5076               | 0.2318        |
+| CHIP-MDCFNPC | micro-F1  | 0.6865               | 0.7366            | 0.7531               | 0.5854        |
+| IMCS-V2-DAC  | macro-F1  | 0.7147               | 0.7639            | 0.7168               | 0.3455        |
+| IMCS-V2-NER  | micro-F1  | 0.8508               | 0.8709            | 0.8779               | 0.5684        |
+| IMCS-V2-SR   | micro-F1  | 0.6168               | 0.6330            | 0.6458               | 0.3305        |
+| IMCS-V2-MRG  | Rouge-L   | 0.4707               | 0.4663            | 0.4811               | 0.3253        |
+| MedDG        | Rouge-L   | 0.1035               | 0.1117            | 0.1298               | 0.1361        |
+| Overall      | avg score | 0.6095               | 0.6448            | 0.6466               | 0.4208        |
 
 
 我们将会持续不断地输出各种不同的baseline模型与代码给大家，希望大家持续关注本repo：
