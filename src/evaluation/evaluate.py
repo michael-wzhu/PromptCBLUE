@@ -1,10 +1,7 @@
 # coding=utf-8
 
 import json
-import os
-import shutil
 import sys
-import zipfile
 
 from evaluators import calc_info_extract_task_scores, calc_cls_task_scores, calc_nlg_task_scores, \
     calc_nlg_task_scores_by_sessions, calc_text2dt_task_scores
@@ -65,6 +62,7 @@ def calc_scores(dict_gt, dict_pred, out_path):
         "CHIP-MDCFNPC": {},
         "IMCS-V2-SR": {},
         "IMCS-V2-DAC": {},
+        "IMCS-V2-MRG": {},
         "CHIP-CTC": {},
         "CHIP-STS": {},
         "KUAKE-IR": {},
@@ -253,6 +251,8 @@ def calc_scores(dict_gt, dict_pred, out_path):
                     "注意事项",
                     "功效作用",
                     "医疗费用",
+
+
                 ]
                 precision, recall, f1 = calc_cls_task_scores(
                     gts,
@@ -275,8 +275,8 @@ def calc_scores(dict_gt, dict_pred, out_path):
         elif task_name in ["KUAKE-QTR", ]:
             try:
                 list_labels = [
-                    "完全不匹配",
-                    "很少匹配",
+                    "完全不匹配或者没有参考价值",
+                    "很少匹配有一些参考价值",
                     "部分匹配",
                     "完全匹配",
                 ]
@@ -303,7 +303,8 @@ def calc_scores(dict_gt, dict_pred, out_path):
                 list_labels = [
                     "完全一致",
                     "后者是前者的语义子集",
-                    "后者是前者的语义父集或语义毫无关联",
+                    "后者是前者的语义父集",
+                    "语义无直接关联",
                 ]
                 precision, recall, f1 = calc_cls_task_scores(
                     gts,
@@ -368,6 +369,7 @@ def calc_scores(dict_gt, dict_pred, out_path):
             "Text2DT",
         ]:
             try:
+
                 tree_lenv_radio, node_f1, path_f1 = calc_text2dt_task_scores(
                     gts,
                     preds,
@@ -378,6 +380,7 @@ def calc_scores(dict_gt, dict_pred, out_path):
                     "path_f1": path_f1,
                 }
             except Exception as e:
+                print("task name: ", task_name)
                 print(e)
                 report_error_msg(error_msg[4], str(e), out_path)
                 success_flag = 0
