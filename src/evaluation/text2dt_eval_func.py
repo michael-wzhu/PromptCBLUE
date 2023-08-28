@@ -1,11 +1,15 @@
 
 # 将符合诊疗决策树约束的节点前序序列转化为代表诊疗决策树结构的节点矩阵，matrix[i][j]='F'/'L'/'R'表示第j个节点是第i个节点的父/左子/右子节点
+import copy
+
 
 def nodematrix(tree):
+
     nodelist=[]
     for i in range(len(tree)):
         nodelist.append(tree[i]["role"])
     node_matrix = [[0 for i in range(len(nodelist))] for j in range(len(nodelist))]
+    count = 0
     while (nodelist[0] != 'D'):
         for i in range(len(nodelist)):
             if nodelist[i] == 'C':
@@ -32,6 +36,11 @@ def nodematrix(tree):
                         break
                 if flag == 2:
                     break
+
+        count += 1
+        if count > 100:
+            break
+
     return(node_matrix)
 
 # 计算两个节点的距离
@@ -82,78 +91,92 @@ def edit_distance(predict_tree, gold_tree, predict_matrix, gold_matrix):
     dis = 0
     stack1 = [0]
     stack2 = [0]
-    while stack1:
-        s1=stack1.pop()
-        s2=stack2.pop()
-        if ('L' not in predict_matrix[s1] and 'R' not in predict_matrix[s1]) \
-                and ('L' in gold_matrix[s2] or 'R' in gold_matrix[s2]):
-            dis += node_dis(predict_tree[s1], gold_tree[s2])
-            stack_tmp=[]
-            stack_tmp.append(gold_matrix[s2].index('R'))
-            stack_tmp.append(gold_matrix[s2].index('L'))
-            while stack_tmp:
-                s_tmp=stack_tmp.pop()
-                dis += node_dis(gold_tree[s_tmp],None)
-                if ('L' in gold_matrix[s_tmp] and 'R' in gold_matrix[s_tmp]):
-                    stack_tmp.append(gold_matrix[s_tmp].index('R'))
-                    stack_tmp.append(gold_matrix[s_tmp].index('L'))
-        elif ('L' in predict_matrix[s1] and 'R' in predict_matrix[s1]) \
-                and ('L' not in gold_matrix[s2] or 'R' not in gold_matrix[s2]):
-            dis += node_dis(predict_tree[s1], gold_tree[s2])
-            stack_tmp=[]
-            stack_tmp.append(predict_matrix[s1].index('R'))
-            stack_tmp.append(predict_matrix[s1].index('L'))
-            while stack_tmp:
-                s_tmp=stack_tmp.pop()
-                dis += node_dis(predict_tree[s_tmp], None)
-                if ('L' in predict_matrix[s_tmp] and 'R' in predict_matrix[s_tmp]):
-                    stack_tmp.append(predict_matrix[s_tmp].index('R'))
-                    stack_tmp.append(predict_matrix[s_tmp].index('L'))
-        elif ('L' not in predict_matrix[s1] and 'R' not in predict_matrix[s1]) and \
-                ('L' not in gold_matrix[s2] and 'R' not in gold_matrix[s2]):
-            dis += node_dis(predict_tree[s1], gold_tree[s2])
-        else:
-            stack1.append(predict_matrix[s1].index('R'))
-            stack1.append(predict_matrix[s1].index('L'))
-            stack2.append(gold_matrix[s2].index('R'))
-            stack2.append(gold_matrix[s2].index('L'))
-            dis += node_dis(predict_tree[s1], gold_tree[s2])
+
+    try:
+        while stack1:
+            s1=stack1.pop()
+            s2=stack2.pop()
+            if ('L' not in predict_matrix[s1] and 'R' not in predict_matrix[s1]) \
+                    and ('L' in gold_matrix[s2] or 'R' in gold_matrix[s2]):
+                dis += node_dis(predict_tree[s1], gold_tree[s2])
+                stack_tmp=[]
+                stack_tmp.append(gold_matrix[s2].index('R'))
+                stack_tmp.append(gold_matrix[s2].index('L'))
+                while stack_tmp:
+                    s_tmp=stack_tmp.pop()
+                    dis += node_dis(gold_tree[s_tmp],None)
+                    if ('L' in gold_matrix[s_tmp] and 'R' in gold_matrix[s_tmp]):
+                        stack_tmp.append(gold_matrix[s_tmp].index('R'))
+                        stack_tmp.append(gold_matrix[s_tmp].index('L'))
+            elif ('L' in predict_matrix[s1] and 'R' in predict_matrix[s1]) \
+                    and ('L' not in gold_matrix[s2] or 'R' not in gold_matrix[s2]):
+                dis += node_dis(predict_tree[s1], gold_tree[s2])
+                stack_tmp=[]
+                stack_tmp.append(predict_matrix[s1].index('R'))
+                stack_tmp.append(predict_matrix[s1].index('L'))
+                while stack_tmp:
+                    s_tmp=stack_tmp.pop()
+                    dis += node_dis(predict_tree[s_tmp], None)
+                    if ('L' in predict_matrix[s_tmp] and 'R' in predict_matrix[s_tmp]):
+                        stack_tmp.append(predict_matrix[s_tmp].index('R'))
+                        stack_tmp.append(predict_matrix[s_tmp].index('L'))
+            elif ('L' not in predict_matrix[s1] and 'R' not in predict_matrix[s1]) and \
+                    ('L' not in gold_matrix[s2] and 'R' not in gold_matrix[s2]):
+                dis += node_dis(predict_tree[s1], gold_tree[s2])
+            else:
+                stack1.append(predict_matrix[s1].index('R'))
+                stack1.append(predict_matrix[s1].index('L'))
+                stack2.append(gold_matrix[s2].index('R'))
+                stack2.append(gold_matrix[s2].index('L'))
+                dis += node_dis(predict_tree[s1], gold_tree[s2])
+
+    except Exception as e:
+        print("calculating edit dist wrong!")
+        print(e)
+
     return dis
 
 # 计算决策路径抽取的TP,TP+FP,TP+FN
 def decision_path(predict_tree, gold_tree, predict_matrix, gold_matrix):
     leaf1, leaf2, paths1, paths2 = [], [], [], []
-    for i in range(len(predict_matrix)):
-        if ('L' not in predict_matrix[i] and 'R' not in predict_matrix[i]):
-            leaf1.append(i)
-    for node in leaf1:
-        path=[predict_tree[node]]
-        while node !=0:
-            #print(predict_matrix)
-            #print(node)
-            #print(predict_matrix[node])
-            path.append(predict_matrix[predict_matrix[node].index('F')][node])
-            path.append(predict_tree[predict_matrix[node].index('F')])
-            node =predict_matrix[node].index('F')
-        paths1.append(path)
-    for i in range(len(gold_matrix)):
-        if ('L' not in gold_matrix[i] and 'R' not in gold_matrix[i]):
-            leaf2.append(i)
-    for node in leaf2:
-        path=[gold_tree[node]]
-        while node !=0:
-            path.append(gold_matrix[gold_matrix[node].index('F')][node])
-            path.append(gold_tree[gold_matrix[node].index('F')])
-            node =gold_matrix[node].index('F')
-        paths2.append(path)
-    res = 0
-    for path1 in paths1:
-        for path2 in paths2:
-            if is_path_equal(path1, path2):
-                res += 1
-                break
+
+    try:
+        for i in range(len(predict_matrix)):
+            if ('L' not in predict_matrix[i] and 'R' not in predict_matrix[i]):
+                leaf1.append(i)
+        for node in leaf1:
+            path=[predict_tree[node]]
+            while node !=0:
+                #print(predict_matrix)
+                #print(node)
+                #print(predict_matrix[node])
+                path.append(predict_matrix[predict_matrix[node].index('F')][node])
+                path.append(predict_tree[predict_matrix[node].index('F')])
+                node =predict_matrix[node].index('F')
+            paths1.append(path)
+        for i in range(len(gold_matrix)):
+            if ('L' not in gold_matrix[i] and 'R' not in gold_matrix[i]):
+                leaf2.append(i)
+        for node in leaf2:
+            path=[gold_tree[node]]
+            while node != 0:
+                path.append(gold_matrix[gold_matrix[node].index('F')][node])
+                path.append(gold_tree[gold_matrix[node].index('F')])
+                node =gold_matrix[node].index('F')
+            paths2.append(path)
+        res = 0
+        for path1 in paths1:
+            for path2 in paths2:
+                if is_path_equal(path1, path2):
+                    res += 1
+                    break
+    except Exception as e:
+        print("calculating decision path wrong!")
+        print(e)
+        res = 0
 
     return res,len(paths1),len(paths2)
+
 
 # 计算三元组抽取的TP,TP+FP,TP+FN
 def triplet_extraction(predict_tree, gold_tree):
@@ -193,11 +216,15 @@ def text2dt_eval_single_tree(predict_tree, gold_tree):
     # 将符合诊疗决策树的节点前序序列转化为代表诊疗决策树结构的节点矩阵，matrix[i][j]='F'/'L'/'R'表示第j个节点是第i个节点的父/左子/右子节点
     for node in predict_tree:
         for i in range(len(node['triples'])):
+            print(node['triples'][i])
+            assert len(node['triples'][i]) == 3, "the triple format is wrong"
             node['triples'][i]=(node['triples'][i][0].lower(), node['triples'][i][1].lower(), node['triples'][i][2].lower())
     for node in gold_tree:
         for i in range(len(node['triples'])):
+            assert len(node['triples'][i]) == 3, "the triple format is wrong"
             node['triples'][i]=(node['triples'][i][0].lower(), node['triples'][i][1].lower(), node['triples'][i][2].lower())
 
+    # print("step1: ")
     predict_matrix = nodematrix(predict_tree)
     gold_matrix = nodematrix(gold_tree)
 
@@ -209,7 +236,14 @@ def text2dt_eval_single_tree(predict_tree, gold_tree):
     correct_triplet_num, predict_triplet_num, gold_triplet_num = triplet_extraction(predict_tree, gold_tree)
 
     # 用于计算决策路径的F1
-    correct_path_num, predict_path_num, gold_path_num = decision_path(predict_tree, gold_tree, predict_matrix, gold_matrix)
+    # print("step2: ")
+    correct_path_num, predict_path_num, gold_path_num = decision_path(
+        copy.deepcopy(predict_tree),
+        copy.deepcopy(gold_tree),
+        copy.deepcopy(predict_matrix),
+        copy.deepcopy(gold_matrix)
+    )
+    # print("correct_path_num: ", correct_path_num)
 
     # 用于计算树的编辑距离
     edit_dis = edit_distance(predict_tree, gold_tree, predict_matrix, gold_matrix)

@@ -206,9 +206,20 @@ def process_generated_results(pred_file):
                     triples = ans_str.split("；triples=")[1]
                     # print("ans_str: ", ans_str)
                     # print("triples: ", triples)
-                    triples = eval(triples)
-                    if not isinstance(triples, list):
-                        triples = []
+                    try:
+                        triples = eval(triples)
+                        if not isinstance(triples, list):
+                            triples = []
+
+                        triples_new = []
+                        for tri in triples:
+                            if len(tri) != 3:
+                                continue
+                            triples_new.append(tri)
+
+                    except Exception as e:
+                        print(e)
+                        triples_new = []
 
                     node = {
                         "role": role,
@@ -403,7 +414,7 @@ def process_generated_results(pred_file):
 
                     finding, conclusion = ans_str.split("：")
                     if conclusion not in answer_choices:
-                        conclusion = "无实际意义的不标注或者和病人当前的状态独立不标注"
+                        conclusion = "不标注"
 
                     list_finding_attrs.append(
                         {
