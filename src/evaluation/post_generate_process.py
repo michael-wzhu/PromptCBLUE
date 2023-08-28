@@ -202,11 +202,15 @@ def process_generated_results(pred_file):
                         continue
 
                     role = ans_str.split("：role=")[1].split("；logical_rel=")[0]
-                    logical_rel = ans_str.split("；logical_rel=")[1].split("；triples=")[0]
-                    triples = ans_str.split("；triples=")[1]
-                    # print("ans_str: ", ans_str)
-                    # print("triples: ", triples)
+                    print(ans_str)
+
                     try:
+                        logical_rel = ans_str.split("；logical_rel=")[1].split("；triples=")[0]
+                    except Exception as e:
+                        logical_rel = "null"
+
+                    try:
+                        triples = ans_str.split("；triples=")[1]
                         triples = eval(triples)
                         if not isinstance(triples, list):
                             triples = []
@@ -224,7 +228,7 @@ def process_generated_results(pred_file):
                     node = {
                         "role": role,
                         "logical_rel": logical_rel,
-                        "triples": triples,
+                        "triples": triples_new,
                     }
                     list_nodes.append(node)
 
