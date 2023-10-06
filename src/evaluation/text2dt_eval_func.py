@@ -4,11 +4,12 @@ import copy
 
 
 def nodematrix(tree):
-
     nodelist=[]
     for i in range(len(tree)):
         nodelist.append(tree[i]["role"])
     node_matrix = [[0 for i in range(len(nodelist))] for j in range(len(nodelist))]
+    if len(tree) == 0:
+        return (node_matrix) 
     count = 0
     while (nodelist[0] != 'D'):
         for i in range(len(nodelist)):
@@ -251,7 +252,6 @@ def text2dt_eval_single_tree(predict_tree, gold_tree):
     correct_node_num, predict_node_num, gold_node_num = node_extraction(predict_tree, gold_tree)
 
     return tree_num,correct_tree_num, correct_triplet_num, predict_triplet_num, gold_triplet_num, correct_path_num, predict_path_num, gold_path_num, edit_dis, correct_node_num, predict_node_num, gold_node_num
-
 
 
 
