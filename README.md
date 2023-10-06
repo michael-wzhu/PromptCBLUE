@@ -17,7 +17,7 @@
 
 考虑到目前的LLM训练可能涉及商业数据，大规模模型开源受到各种外在条件的限制，我们将对PromptCBLUE评测开放两个赛道：
 - 通用赛道：接受来自企业，高校，开源社区，各类研究团队或者个人对自研的LLM进行评测，不需要开源其模型。评测地址：[PromptCBLUE通用赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532085/introduction)
-- 开源赛道：接受各类参赛团队提交评测，但是其必须使用开源的大模型底座，且只能使用开源的或者可以全部提交至比赛组织方审核的数据集进行训练/微调。评测地址：[PromptCBLUE通用赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532084/introduction)
+- 开源赛道：接受各类参赛团队提交评测，但是其必须使用开源的大模型底座，且只能使用开源的或者可以全部提交至比赛组织方审核的数据集进行训练/微调。评测地址：[PromptCBLUE开源赛道评测网站](https://tianchi.aliyun.com/competition/entrance/532084/introduction)
 
 
 同时，为辅助LLM在医疗领域的各项能力提升，我们同时开源以下数据/模型资源供参赛者使用：
