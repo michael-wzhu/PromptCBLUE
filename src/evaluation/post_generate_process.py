@@ -232,6 +232,15 @@ def process_generated_results(pred_file):
                     }
                     list_nodes.append(node)
 
+                if not list_nodes:
+                    list_nodes = [
+                        {
+                            "role": "D",
+                            "logical_rel": "null",
+                            "triples": []
+                        }
+                    ]
+
                 structured_output[f"{task_dataset}"].append(
                     {
                         "sample_id": sample_id_,
