@@ -8,8 +8,10 @@ def nodematrix(tree):
     for i in range(len(tree)):
         nodelist.append(tree[i]["role"])
     node_matrix = [[0 for i in range(len(nodelist))] for j in range(len(nodelist))]
-    if len(tree) == 0:
-        return (node_matrix) 
+    
+    # if len(tree) == 0:
+    #    return (node_matrix) 
+    
     count = 0
     while (nodelist[0] != 'D'):
         for i in range(len(nodelist)):
