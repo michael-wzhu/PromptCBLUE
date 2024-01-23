@@ -292,6 +292,7 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 - [CHIP-PromptCBLUE评测任务综述： Overview of the PromptCBLUE Shared Task in CHIP2023](https://arxiv.org/abs/2312.17522)
 - [ChatGLM-6b模型](https://github.com/THUDM/ChatGLM-6B)
 - [CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark](https://aclanthology.org/2022.acl-long.544) (Zhang et al., ACL 2022)
+- [Text2DT论文: Text2MDT: Extracting Medical Decision Trees from Medical Texts](https://arxiv.org/pdf/2401.02034.pdf)
 - Zan, Hongying, Wenxin Li, Kunli Zhang, Yajuan Ye, Baobao Chang and Zhifang Sui. “Building a Pediatric Medical Corpus: Word Segmentation and Named Entity Annotation.” Chinese Lexical Semantics (2020).
 - Guan, Tongfeng, Hongying Zan, Xiabing Zhou, Hongfei Xu and Kunli Zhang. “CMeIE: Construction and Evaluation of Chinese Medical Information Extraction Dataset.” Natural Language Processing and Chinese Computing (2020).
 - Zong, Hui, Jinxuan Yang, Zeyu Zhang, Zuofeng Li and Xiaoyan Zhang. “Semantic categorization of Chinese eligibility criteria in clinical trials using machine learning methods.” BMC Medical Informatics and Decision Making 21 (2021): n. pag.
@@ -305,4 +306,4 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 - 熊英,陈漠沙,陈清财,汤步洲.CHIP-2021评测任务1概述:医学对话临床发现阴阳性判别任务[J].医学信息学杂志,2023,44(3):46~51
 - 骆迅,倪渊,汤步洲,雷健波. 基于竞赛视角探讨文本语义匹配技术在中文医学文本领域中的应用 [J]. 中国数字医学. 2021 (11)
 - 李文锋，朱威，王晓玲，等.Text2DT:面向临床针对文本的决策规则抽取技术[J].医学信息学杂志，2022，43（12）：16-22.
-- [Text2DT论文: Text2MDT: Extracting Medical Decision Trees from Medical Texts](https://arxiv.org/pdf/2401.02034.pdf)
+
