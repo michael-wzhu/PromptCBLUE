@@ -305,3 +305,4 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 - 熊英,陈漠沙,陈清财,汤步洲.CHIP-2021评测任务1概述:医学对话临床发现阴阳性判别任务[J].医学信息学杂志,2023,44(3):46~51
 - 骆迅,倪渊,汤步洲,雷健波. 基于竞赛视角探讨文本语义匹配技术在中文医学文本领域中的应用 [J]. 中国数字医学. 2021 (11)
 - 李文锋，朱威，王晓玲，等.Text2DT:面向临床针对文本的决策规则抽取技术[J].医学信息学杂志，2022，43（12）：16-22.
+- [Text2DT论文: Text2MDT: Extracting Medical Decision Trees from Medical Texts](https://arxiv.org/pdf/2401.02034.pdf)
