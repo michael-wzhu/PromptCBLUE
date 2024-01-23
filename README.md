@@ -288,6 +288,8 @@ Logo中的小学霸羊驼是由[midjourney](http://midjourney.com)自动生成�
 
 ## References
 
+- [PromptCBLUE基准论文: PromptCBLUE: A Chinese Prompt Tuning Benchmark for the Medical Domain](https://arxiv.org/abs/2310.14151)
+- [CHIP-PromptCBLUE评测任务综述： Overview of the PromptCBLUE Shared Task in CHIP2023](https://arxiv.org/abs/2312.17522)
 - [ChatGLM-6b模型](https://github.com/THUDM/ChatGLM-6B)
 - [CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark](https://aclanthology.org/2022.acl-long.544) (Zhang et al., ACL 2022)
 - Zan, Hongying, Wenxin Li, Kunli Zhang, Yajuan Ye, Baobao Chang and Zhifang Sui. “Building a Pediatric Medical Corpus: Word Segmentation and Named Entity Annotation.” Chinese Lexical Semantics (2020).
